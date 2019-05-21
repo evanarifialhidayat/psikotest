@@ -17,6 +17,7 @@ import {
 import Carousel from 'react-native-snap-carousel';
 import { material , iOSUIKit , iOSColors , systemWeights } from 'react-native-typography';
 import { Actions } from 'react-native-router-flux';
+import ActionButton from 'react-native-action-button';
 export default class Makanan extends Component {
   constructor(props) {
     super(props);
@@ -250,7 +251,14 @@ _renderItem ({item, index}) {
 
         </View> 
     </ScrollView>
-        
+         <ActionButton buttonColor="rgba(231,76,60,1)">
+                <ActionButton.Item buttonColor='#3498db' title="Home" onPress={() => {Actions.Dasbord(); }}>
+                   <Image source={require('@images/house.png')}  style={styles.actionButtonIcon}  />
+                </ActionButton.Item>
+                <ActionButton.Item buttonColor='#8e2600' title="Keluar" onPress={() => {Actions.Login(); }}>
+                   <Image source={require('@images/signaling.png')}  style={styles.actionButtonIcon}  />
+                </ActionButton.Item>                          
+              </ActionButton>
       </View>
     );
   }
@@ -439,4 +447,10 @@ const styles = StyleSheet.create({
     marginLeft:15,
     justifyContent: 'center'
   },
+  actionButtonIcon: {
+      fontSize: 20,
+      height: 40,
+      width: 40,
+      color: 'white',
+    },
 });  

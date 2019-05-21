@@ -115,7 +115,12 @@ _renderItem ({item, index}) {
               activeSlideAlignment={'start'}
               inactiveSlideScale={1}
               inactiveSlideOpacity={1}
-              enableMomentum={true}    
+              enableMomentum={true}   
+              loop={true}
+              loopClonesPerSide={3}
+              autoplay={true}
+              autoplayDelay={2000}
+              autoplayInterval={3000}      
             />
     );
   }

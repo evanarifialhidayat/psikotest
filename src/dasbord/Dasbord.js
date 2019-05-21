@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import {  StyleSheet,Text,  View,Image , TouchableOpacity,Alert,BackHandler ,ImageBackground } from 'react-native';
+import {  StyleSheet,Text,  View,Image , TouchableOpacity,Alert,BackHandler 
+  ,ImageBackground,ScrollView,StatusBar ,Dimensions, Platform } from 'react-native';
 import Grid from 'react-native-grid-component'; 
 import Expo, {  AdMobBanner , Constants } from 'expo';
 import { Actions } from 'react-native-router-flux';
 import Logo from '@pages/Logo';
+import Carousel, { Pagination } from 'react-native-snap-carousel';
+import ActionButton from 'react-native-action-button';
 
 const items = [
   { thumbnail: {  uri : require('@images/panganan.png'   ) , mulai: 'Sega' ,warna:'#499b86',buuton:'Makanan'} },
@@ -11,18 +14,35 @@ const items = [
   { thumbnail: {  uri : require('@images/warung.png'      ) , mulai: 'Warung',warna:'#a0833b',buuton:'Toko'} },
    { thumbnail: {  uri : require('@images/travel.png' ) , mulai: 'Travel' ,warna:'#fe3161',buuton:'Travel'}},
   { thumbnail: {  uri : require('@images/kedo.png' ) , mulai: 'Kado' ,warna:'#ac888e',buuton:'Pesanan'}}
- 
-];
+ ];
 
+const SLIDER_1_FIRST_ITEM = 0;
+const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
 
+const sliderWidth = viewportWidth;
+const itemWidth = viewportWidth;
 
 export default class Dasbord extends Component { 
-   state = {
-    modalVisible: false,
-  };
-    constructor(props) {
+ constructor(props) {
     super(props); 
-    }
+    this.state = {
+        slider1ActiveSlide: SLIDER_1_FIRST_ITEM,
+        data: [
+                {id:1, colsi: require('@images/c1.jpg' )},
+                {id:2, colsi: require('@images/c2.jpg' )},
+                {id:3, colsi: require('@images/c3.jpg' )},
+                {id:4, colsi: require('@images/c4.jpg' )},
+                {id:5, colsi: require('@images/c5.jpg' )},
+                {id:6, colsi: require('@images/c6.jpg' )},
+                {id:7, colsi: require('@images/c7.jpg' )},
+                {id:8, colsi: require('@images/c8.jpg' )}
+              ],
+               modalVisible: false,
+    };
+
+
+}
+
 
  componentDidMount() {
     Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT); 
@@ -53,6 +73,15 @@ export default class Dasbord extends Component {
             </TouchableOpacity>
           );
    }
+
+   _renderItemHeader ({item, index}){
+        return (
+            <TouchableOpacity key={index} >
+                <Image  style = {styles.image} source = { item.colsi } />
+            </TouchableOpacity>
+        );
+    }
+
  
  async _eventLavel(item){
       if(item === 'Dasbord'){
@@ -72,16 +101,27 @@ export default class Dasbord extends Component {
     return (
     <ImageBackground   style={styles.container} >   
           <View style={styles.header}>
-            <View style={styles.headerContent}>
-                <TouchableOpacity onPress={this.backAndroid}> 
-                  <Image style={styles.avatar}
-                     source={require('@images/logo.png')}  />
-                  </TouchableOpacity>
-                <Text style={styles.name}>
-                  Abang
-                </Text>
-            </View>
+                <Carousel
+                    ref={c => this._slider1Ref = c}
+                    data={this.state.data}
+                    renderItem={this._renderItemHeader.bind(this)}
+                    sliderWidth={sliderWidth}
+                    itemWidth={itemWidth}
+                    firstItem={SLIDER_1_FIRST_ITEM}
+                    inactiveSlideScale={0.80}
+                    activeSlideAlignment={'start'}
+                    inactiveSlideOpacity={0.7}
+                    inactiveSlideShift={0.6}
+                    containerCustomStyle={styles.slider}
+                    contentContainerCustomStyle={styles.sliderContentContainer}
+                    loop={true}
+                    loopClonesPerSide={3}
+                    autoplay={true}
+                    autoplayDelay={2000}
+                    autoplayInterval={4000}     
+                />
           </View>
+         
     		       
         <View style={styles.signupInput}>
               <Grid
@@ -90,7 +130,17 @@ export default class Dasbord extends Component {
                 data={items}
                 itemsPerRow={4}
               />
+
+              <ActionButton buttonColor="rgba(231,76,60,1)">
+                <ActionButton.Item buttonColor='#3498db' title="Home" onPress={() => {this.backAndroid()}}>
+                   <Image source={require('@images/house.png')}  style={styles.actionButtonIcon}  />
+                </ActionButton.Item>
+                <ActionButton.Item buttonColor='#8e2600' title="Keluar" onPress={() => {this.backAndroid()}}>
+                   <Image source={require('@images/signaling.png')}  style={styles.actionButtonIcon}  />
+                </ActionButton.Item>                          
+              </ActionButton>
         </View>
+       
      </ImageBackground>
     );
   }
@@ -170,5 +220,23 @@ header:{
    alignItems: 'center',
      justifyContent: 'center',
      color : 'white',
-  }
+  },
+   slider: {
+        marginTop: 0,
+        overflow: 'visible' 
+    },
+     sliderContentContainer: {
+        paddingVertical: 0 
+    },
+     image: {
+        resizeMode: 'cover',
+        height: Dimensions.get('window').width / 2,
+        width: Dimensions.get('window').width
+    },
+    actionButtonIcon: {
+      fontSize: 20,
+      height: 40,
+      width: 40,
+      color: 'white',
+    },
 });
