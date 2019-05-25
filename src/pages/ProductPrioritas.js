@@ -17,6 +17,7 @@ import {
 import Carousel from 'react-native-snap-carousel';
 import { material , iOSUIKit , iOSColors , systemWeights } from 'react-native-typography';
 import { Actions } from 'react-native-router-flux';
+import Placeholder, { Line , Media } from "rn-placeholder";
 export default class ProductPrioritas extends Component {
   constructor(props) {
     super(props);
@@ -33,7 +34,19 @@ export default class ProductPrioritas extends Component {
         {id:"0999", harga:"Rp. 19.000", foto: require('@images/redmore.png' )  , name: "Felis",                 jarak:"9 KM",               colsimage:require('@images/redmore.png' )},
       ],
       makanan: '',
+      isReady: false, 
+      setReady: false
     };
+    if(this.state.isReady == false){
+        setInterval(
+          () => this.setState({ isReady: true}),
+          3000
+        );
+        setInterval(
+          () => this.setState({ setReady: true }),
+          3000
+        );
+      }
   }
   
   onPresMakanan(id){
@@ -45,64 +58,104 @@ export default class ProductPrioritas extends Component {
    }   
   }
 
+  componentDidMount() {}
+
+
 _renderItem ({item, index}) {
-  const prioritasvariabel = item.id;
+  const prioritasvariabel = item.id;  
+  const ComponentLoaded = () => 
+      <TouchableOpacity  style={{borderRadius:10,flex: 1,alignSelf: 'stretch'}} source={item.colsimage}
+                                                              onPress={this.onPresMakanan.bind(this,item.id)}
+                                                            >     
+                                                                 <ImageBackground  style={{borderRadius:10,flex: 1,alignSelf: 'stretch'}} source={item.colsimage} />                     
+                                                                            <View style={{flexDirection: 'row'}}>
+                                                                                <Text style={material.body2 ,{ flex: 2 }}>Warung Bu Mian</Text>                                    
+                                                                             </View>
+                                                                             <View >
+                                                                                <Text style={material.caption}>Nasi goreng</Text>   
+                                                                                <Text style={material.caption}>Jln. Jendral Sudirman No.34 Depan Sma</Text>    
+                                                                             </View>    
+
+                                                                             <View style={{flexDirection: 'row',justifyContent: 'flex-end',paddingRight: 15}}>
+                                                                                  <View style={{ flex : 1,}} >
+                                                                                        <Text style={{ flex: 1 , paddingTop:2,fontSize: 10, color: iOSColors.red,  textAlign: 'left',}}>
+                                                                                          {item.harga}
+                                                                                        </Text>   
+                                                                                  </View>
+                                                                                
+                                                                                          <ImageBackground style={{width: 20, height: 20,textAlign: 'right', }}  source={require('@images/like.png')}>
+                                                                                              <Text  style={{color: iOSColors.white, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>130</Text>
+                                                                                          </ImageBackground>  
+                                                                                          <ImageBackground style={{ width: 20, height: 20, textAlign: 'right', }}  source={require('@images/comment.png')}>
+                                                                                            <Text  style={{ color: iOSColors.white, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>100</Text>
+                                                                                          </ImageBackground>  
+                                                                                           <ImageBackground style={{ width: 20, height: 20, textAlign: 'right', }}  source={require('@images/logo.png')}>
+                                                                                            <Text  style={{ color: iOSColors.white, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>100</Text>
+                                                                                          </ImageBackground> 
+                                                                                          <View>
+                                                                                            <Text style={{ flex: 1 , paddingTop:2,fontSize: 10, color: iOSColors.lightgray,  textAlign: 'right',}}>
+                                                                                               ({item.jarak})
+                                                                                            </Text> 
+                                                                                          </View> 
+                                                                              </View>                                 
+                                                          </TouchableOpacity>
+      ;
+
+      const ComponentLoadedElse = () => 
+                            <TouchableOpacity  style={{borderRadius:10,flex: 1,alignSelf: 'stretch'}} source={item.colsimage}
+                                              onPress={this.onPresMakanan.bind(this,item.id)}
+                                          >     
+                                           <ImageBackground  style={{borderRadius:10,flex: 1,alignSelf: 'stretch'}} source={item.colsimage} />                     
+                                            <View style={{flexDirection: 'row' ,justifyContent: 'center', alignItems: 'center',}}>
+                                                <Text >
+                                                        Lainnya
+                                                </Text>                                    
+                                             </View>                                                           
+                                    </TouchableOpacity>        
+      ;
         return (
             <View style={styles.slide}>    
               {
                 prioritasvariabel !== "0999" ?
-                             <TouchableOpacity  style={{borderRadius:10,flex: 1,alignSelf: 'stretch'}} source={item.colsimage}
-                                onPress={this.onPresMakanan.bind(this,item.id)}
-                              >     
-                                   <ImageBackground  style={{borderRadius:10,flex: 1,alignSelf: 'stretch'}} source={item.colsimage} />                     
-                                              <View style={{flexDirection: 'row'}}>
-                                                  <Text style={material.body2 ,{ flex: 2 }}>Warung Bu Mian</Text>                                    
-                                               </View>
-                                               <View >
-                                                  <Text style={material.caption}>Nasi goreng</Text>   
-                                                  <Text style={material.caption}>Jln. Jendral Sudirman No.34 Depan Sma</Text>    
-                                               </View>    
-
-                                               <View style={{flexDirection: 'row',justifyContent: 'flex-end',paddingRight: 15}}>
-                                                    <View style={{ flex : 1,}} >
-                                                          <Text style={{ flex: 1 , paddingTop:2,fontSize: 10, color: iOSColors.red,  textAlign: 'left',}}>
-                                                            {item.harga}
-                                                          </Text>   
-                                                    </View>
-                                                  
-                                                            <ImageBackground style={{width: 20, height: 20,textAlign: 'right', }}  source={require('@images/like.png')}>
-                                                                <Text  style={{color: iOSColors.white, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>130</Text>
-                                                            </ImageBackground>  
-                                                            <ImageBackground style={{ width: 20, height: 20, textAlign: 'right', }}  source={require('@images/comment.png')}>
-                                                              <Text  style={{ color: iOSColors.white, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>100</Text>
-                                                            </ImageBackground>  
-                                                             <ImageBackground style={{ width: 20, height: 20, textAlign: 'right', }}  source={require('@images/logo.png')}>
-                                                              <Text  style={{ color: iOSColors.white, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>100</Text>
-                                                            </ImageBackground> 
-                                                            <View>
-                                                              <Text style={{ flex: 1 , paddingTop:2,fontSize: 10, color: iOSColors.lightgray,  textAlign: 'right',}}>
-                                                                 ({item.jarak})
-                                                              </Text> 
-                                                            </View> 
-                                                </View>                                 
-                            </TouchableOpacity>
+                            <Placeholder
+                                    isReady={this.state.isReady}
+                                    size={60}
+                                    animate="fade"
+                                    lineNumber={4}
+                                    lineSpacing={5}
+                                    lastLineWidth="30%"    
+                                    whenReadyRender={() => 
+                                              <ComponentLoaded />
+                                      }                                
+                                  >
+                                        <Line width="70%" />
+                                        <Line />
+                                        <Line />
+                                        <Line width="30%" />
+                                      </Placeholder>
                    : 
-                            <TouchableOpacity  style={{borderRadius:10,flex: 1,alignSelf: 'stretch'}} source={item.colsimage}
-                                onPress={this.onPresMakanan.bind(this,item.id)}
-                            >     
-                                   <ImageBackground  style={{borderRadius:10,flex: 1,alignSelf: 'stretch'}} source={item.colsimage} />                     
-                                    <View style={{flexDirection: 'row' ,justifyContent: 'center', alignItems: 'center',}}>
-                                        <Text >
-                                                Lainnya
-                                        </Text>                                    
-                                     </View>                                                           
-                            </TouchableOpacity>                   
+                          <Placeholder
+                                    isReady={this.state.isReady}
+                                    size={60}
+                                    animate="fade"
+                                    lineNumber={4}
+                                    lineSpacing={5}
+                                    lastLineWidth="30%"    
+                                    whenReadyRender={() => 
+                                              <ComponentLoadedElse />
+                                      }                                
+                                  >
+                                        <Line width="70%" />
+                                        <Line />
+                                        <Line />
+                                        <Line width="30%" />
+                                      </Placeholder> 
             }                
         </View>
         );
     }
 
-  render() {
+  render() {   
     return (
          <Carousel 
               ref={(c1) => { this._carousel = c1; }}

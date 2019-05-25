@@ -7,6 +7,7 @@ import { Actions } from 'react-native-router-flux';
 import Logo from '@pages/Logo';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import ActionButton from 'react-native-action-button';
+import IconBadge from 'react-native-icon-badge';
 
 const items = [
   { thumbnail: {  uri : require('@images/panganan.png'   ) , mulai: 'Sega' ,warna:'#499b86',buuton:'Makanan'} },
@@ -101,6 +102,7 @@ export default class Dasbord extends Component {
     return (
     <ImageBackground   style={styles.container} >   
           <View style={styles.header}>
+                
                 <Carousel
                     ref={c => this._slider1Ref = c}
                     data={this.state.data}
@@ -120,7 +122,36 @@ export default class Dasbord extends Component {
                     autoplayDelay={2000}
                     autoplayInterval={4000}     
                 />
+                <View style={{  flex: 1,
+                                flexDirection: 'row',
+                                position: 'absolute', 
+                                justifyContent: 'flex-end',
+                                top: 0, 
+                                left: 0, 
+                                right: 0, 
+                                bottom: 0, 
+                                paddingVertical: 25,                               
+                              }}>
+                      <IconBadge
+                        MainElement={
+                          <View style={{ backgroundColor: "#ffffff", borderRadius: 100,  }}>
+                             <Image source={require('@images/lonceng.png')}  style={styles.actionButtonIconNotif}  />
+                          </View>
+                        }
+                        BadgeElement={
+                             <Text style={{color:'#FFFFFF'}}>3</Text>
+                        }
+                        IconBadgeStyle={
+                          {width:20,
+                          height:20,
+                          backgroundColor: '#ff0000'}
+                        }
+                        Hidden={this.state.BadgeCount==0}
+                        />
+                </View>
           </View>
+
+          
          
     		       
         <View style={styles.signupInput}>
@@ -238,5 +269,12 @@ header:{
       height: 40,
       width: 40,
       color: 'white',
+    },
+    actionButtonIconNotif: {
+      fontSize: 20,
+      height: 60,
+      width: 60,
+      color: 'white',
+        
     },
 });
