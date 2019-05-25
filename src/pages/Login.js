@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#d7ede7',
+    backgroundColor: '#FFFFFF',
     alignItems: 'center',
     justifyContent: 'center',   
     position: 'absolute',
@@ -71,6 +71,6 @@ const styles = StyleSheet.create({
   signupbutton: {
       color:'#0D47A1',
       fontSize: 16,
-      fontWeight: '50'
+      fontWeight: 'bold'
   }
 });

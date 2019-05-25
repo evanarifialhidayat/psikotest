@@ -128,10 +128,10 @@ _renderItem ({item, index}) {
                                               <ComponentLoaded />
                                       }                                
                                   >
-                                        <Line width="70%" />
-                                        <Line />
-                                        <Line />
-                                        <Line width="30%" />
+                                        <Line width="70%" style={{backgroundColor:'rgba(25,25,25,0.3)'}}/>
+                                        <Line style={{backgroundColor:'rgba(25,25,25,0.3)'}}/>
+                                        <Line style={{backgroundColor:'rgba(25,25,25,0.3)'}}/>
+                                        <Line width="30%" style={{backgroundColor:'rgba(25,25,25,0.3)'}}/>
                                       </Placeholder>
                    : 
                           <Placeholder

@@ -18,6 +18,7 @@ import Carousel from 'react-native-snap-carousel';
 import { material , iOSUIKit , iOSColors , systemWeights } from 'react-native-typography';
 import { Actions } from 'react-native-router-flux';
 import ActionButton from 'react-native-action-button';
+import IconBadge from 'react-native-icon-badge';
 export default class Makanan extends Component {
   constructor(props) {
     super(props);
@@ -98,11 +99,31 @@ _renderItem ({item, index}) {
                 onChangeText={(makanan) => this.setState({makanan})}
                 />
           </View>
+           <IconBadge
+                        MainElement={
+                          <View style={{ backgroundColor: "#ffffff", borderRadius: 100,  }}>
+                             <Image source={require('@images/lonceng.png')}  style={styles.actionButtonIconNotif}  />
+                          </View>
+                        }
+                        BadgeElement={
+                             <Text style={{color:'#FFFFFF' , fontSize: 10,}}>3</Text>
+                        }
+                        IconBadgeStyle={
+                          {
+                            width:17,
+                            height:17,
+                            backgroundColor: '#ff0000'
+                          }
+                        }
+                        Hidden={this.state.BadgeCount==0}
+              />
         </View>
 
       <ScrollView>
         <View style={{backgroundColor: '#FFFFFF'}}>
-            <View style={{ height: 20, flexDirection: 'row',paddingVertical: 5, paddingHorizontal: 2, paddingBottom:15 ,paddingTop: 10, borderColor: '#4d4d4f', borderBottomWidth: 3,}}>
+            <View style={{ height: 20, flexDirection: 'row',paddingVertical: 5, 
+                            paddingHorizontal: 2, paddingBottom:15 ,paddingTop: 10, 
+                            borderColor: '#4d4d4f', borderBottomWidth: 2, backgroundColor : '#66181f',}}>
                     <View style={{ flex: 8,  justifyContent: 'center'}}>
                         <Text style={styles.headerCols}>Makanan Tradisonal</Text>
                     </View>
@@ -133,7 +154,9 @@ _renderItem ({item, index}) {
               enableMomentum={true}    
             />
 
-            <View style={{ height: 20, flexDirection: 'row',paddingVertical: 5, paddingHorizontal: 2, paddingBottom:15 ,paddingTop: 10,  borderColor: '#4d4d4f', borderBottomWidth: 3,}}>
+            <View style={{ height: 20, flexDirection: 'row',paddingVertical: 5, 
+                            paddingHorizontal: 2, paddingBottom:15 ,paddingTop: 10, 
+                            borderColor: '#4d4d4f', borderBottomWidth: 2, backgroundColor : '#66181f',}}>
                     <View style={{ flex: 8,  justifyContent: 'center'}}>
                         <Text style={styles.headerCols}>Makanan Melenial</Text>
                     </View>
@@ -162,7 +185,9 @@ _renderItem ({item, index}) {
                 enableMomentum={true}  
             />
 
-            <View style={{ height: 20, flexDirection: 'row',paddingVertical: 5, paddingHorizontal: 2, paddingBottom:15 ,paddingTop: 10,  borderColor: '#4d4d4f', borderBottomWidth: 3,}}>
+            <View style={{ height: 20, flexDirection: 'row',paddingVertical: 5, 
+                            paddingHorizontal: 2, paddingBottom:15 ,paddingTop: 10, 
+                            borderColor: '#4d4d4f', borderBottomWidth: 2, backgroundColor : '#66181f',}}>
                     <View style={{ flex: 8,  justifyContent: 'center'}}>
                         <Text style={styles.headerCols}>Jajanan Tradisonal</Text>
                     </View>
@@ -190,65 +215,6 @@ _renderItem ({item, index}) {
                 inactiveSlideOpacity={1}
                 enableMomentum={true}  
             />
-
-            <View style={{ height: 20, flexDirection: 'row',paddingVertical: 5, paddingHorizontal: 2, paddingBottom:15 ,paddingTop: 10, borderColor: '#4d4d4f', borderBottomWidth: 3,}}>
-                    <View style={{ flex: 8,  justifyContent: 'center'}}>
-                        <Text style={styles.headerCols}>Jajanan Melenial</Text>
-                    </View>
-                    <View style={{ flex: 2, flexDirection: 'row',  justifyContent: 'center',}}>
-                        <View style={{ justifyContent: 'center'}}>
-                             <Text style={styles.headerColsAll}>Lainnya</Text>
-                        </View>
-                         <View style={{ justifyContent: 'center'}}>       
-                         <TouchableOpacity style={{  width:15 , height: 15,}} source={require('@images/next.png')} >                                    
-                            <Image style={{  width:15 , height: 15,}} source={require('@images/next.png')} />    
-                          </TouchableOpacity>                                   
-                        </View>                            
-                    </View>
-            </View> 
-            <Carousel 
-              ref={(c4) => { this._carousel = c4; }}
-              data={this.state.data}
-              renderItem={this._renderItem.bind(this)}
-              layout={'default'}
-              firstItem={0}
-                sliderWidth={SLIDER_WIDTH}
-                itemWidth={ITEM_WIDTH}
-                activeSlideAlignment={'start'}
-                inactiveSlideScale={1}
-                inactiveSlideOpacity={1}
-                enableMomentum={true}  
-            />
-
-            <View style={{ height: 20, flexDirection: 'row',paddingVertical: 5, paddingHorizontal: 2, paddingBottom:15 ,paddingTop: 10,  borderColor: '#4d4d4f', borderBottomWidth: 3,}}>
-                    <View style={{ flex: 8,  justifyContent: 'center'}}>
-                        <Text style={styles.headerCols}>Wisata Malam</Text>
-                    </View>
-                   <View style={{ flex: 2, flexDirection: 'row',  justifyContent: 'center',}}>
-                        <View style={{ justifyContent: 'center'}}>
-                             <Text style={styles.headerColsAll}>Lainnya</Text>
-                        </View>
-                        <View style={{ justifyContent: 'center'}}>       
-                         <TouchableOpacity style={{  width:15 , height: 15,}} source={require('@images/next.png')} >                                    
-                            <Image style={{  width:15 , height: 15,}} source={require('@images/next.png')} />    
-                          </TouchableOpacity>                                   
-                        </View>                             
-                    </View>
-            </View> 
-            <Carousel 
-              ref={(c5) => { this._carousel = c5; }}
-              data={this.state.data}
-              renderItem={this._renderItem.bind(this)}
-              layout={'default'}
-              firstItem={0}
-                sliderWidth={SLIDER_WIDTH}
-                itemWidth={ITEM_WIDTH}
-                activeSlideAlignment={'start'}
-                inactiveSlideScale={1}
-                inactiveSlideOpacity={1}
-                enableMomentum={true}  
-            />
-
         </View> 
     </ScrollView>
          <ActionButton buttonColor="rgba(231,76,60,1)">
@@ -280,8 +246,8 @@ const itemHeight = slideHeight + verticalMargin * 2;
 
 const styles = StyleSheet.create({
   headerCols: {
-    fontSize: 18,
-    color: systemWeights.reguler,
+    fontSize: 15,
+    color: iOSColors.green,
   },
   headerColsAll: {
     fontSize: 13,
@@ -297,7 +263,7 @@ const styles = StyleSheet.create({
     },
   container:{
     flex:1,
-     backgroundColor: '#000000',
+     backgroundColor: '#FFFFFF',
   },
   list: {
     paddingHorizontal: 10,
@@ -414,21 +380,27 @@ const styles = StyleSheet.create({
     height:45,
     borderRadius:40,
   },
+   actionButtonIconNotif: {
+      fontSize: 8,
+      height: 39,
+      width: 39,
+      color: 'white',        
+    },
  formContent:{
     flexDirection: 'row',
     marginTop:20,
-    backgroundColor: '#1fba5d',
+    backgroundColor: '#FFFFFF',
   },
   inputContainer: {
-      borderBottomColor: '#F5FCFF',
-      backgroundColor: '#FFFFFF',
+      backgroundColor:'rgba(25,25,25,0.0)',
       borderRadius:10,
-      borderBottomWidth: 1,
+      borderBottomWidth: 3,
+      borderBottomColor:  '#000000',
       height:30,
       flexDirection: 'row',
       alignItems:'center',
       flex:1,
-      margin:10,
+      margin:5,
   },
   icon:{
     width:30,
