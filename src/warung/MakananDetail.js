@@ -1,56 +1,53 @@
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  Alert,
-  ScrollView,
-  FlatList,
-  Button,
-  TextInput,Dimensions,
-  ImageBackground,
-  TouchableHighlight,
-  BackHandler,
-} from 'react-native';
+import {  StyleSheet,Text,  View,Image , TouchableOpacity,Alert,BackHandler 
+  ,ImageBackground,ScrollView,StatusBar ,Dimensions, Platform ,TextInput,
+FlatList,} from 'react-native';
 import Grid from 'react-native-grid-component'; 
 import Expo, {  AdMobBanner , Constants } from 'expo';
 import { Actions } from 'react-native-router-flux';
 import Logo from '@pages/Logo';
-import Carousel from 'react-native-snap-carousel';
+import Carousel, { Pagination } from 'react-native-snap-carousel';
+import ActionButton from 'react-native-action-button';
+import IconBadge from 'react-native-icon-badge';
 import { material , iOSUIKit , iOSColors , systemWeights } from 'react-native-typography';
-
 import AnimateLoadingButton from 'react-native-animate-loading-button';
-export default class MakananDetail extends Component {   
-    constructor(props) {     
-    super(props);
+
+const SLIDER_1_FIRST_ITEM = 0;
+const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
+
+const sliderWidth = viewportWidth;
+const itemWidth = viewportWidth;
+
+export default class MakananDetail extends Component { 
+ constructor(props) {
+    super(props);  
     this.state = {
-      data: [
-        {id:1, harga:"Rp. 10.000", foto: require('@images/1.jpg' )  , name: "Warung Bu Jarwo",             jarak:"1 KM"   , colsimage:require('@images/m1.jpg' )},
-        {id:2, harga:"Rp. 20.000", foto: require('@images/2.jpg' )  , name: "Warung Bu Ida",             jarak:"2 KM",      colsimage:require('@images/m2.jpg' )},
-        {id:3, harga:"Rp. 5.000", foto: require('@images/3.jpg' )  , name: "Warung Bu Gureng ",            jarak:"3 KM",   colsimage:require('@images/c3.jpg' )},
-        {id:4, harga:"Rp. 11.000", foto: require('@images/4.jpg' )  , name: "Warung Bu Slamet",         jarak:"4 KM",       colsimage:require('@images/c4.jpg' )},
-        {id:5, harga:"Rp. 14.000", foto: require('@images/5.jpg' )  , name: "Mba Wah",                 jarak:"5 KM",              colsimage:require('@images/c5.jpg' )},
-        {id:6, harga:"Rp. 13.000", foto: require('@images/6.jpg' )  , name: "Warung Bu Erlin",        jarak:"6 KM",         colsimage:require('@images/c6.jpg' )},
-        {id:7, harga:"Rp. 15.000", foto: require('@images/7.jpg' )  , name: "Warung Bu Yunus",        jarak:"7 KM",             colsimage:require('@images/c7.jpg' )},
-        {id:8, harga:"Rp. 9.000", foto: require('@images/8.jpg' )  , name: "Ridiculus mus",          jarak:"8 KM",         colsimage:require('@images/c8.jpg' )},
-        {id:9, harga:"Rp. 19.000", foto: require('@images/9.jpg' )  , name: "Felis",                 jarak:"9 KM",               colsimage:require('@images/c9.jpg' )},
-      ],
-      comment:[
-        {id:1, image: "https://bootdey.com/img/Content/avatar/avatar1.png", name:"Frank Odalthh",    comment:"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor."},
-        {id:2, image: "https://bootdey.com/img/Content/avatar/avatar6.png", name:"John DoeLink",     comment:"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor."},
-        {id:3, image: "https://bootdey.com/img/Content/avatar/avatar7.png", name:"March SoulLaComa", comment:"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor."},
-        {id:4, image: "https://bootdey.com/img/Content/avatar/avatar2.png", name:"Finn DoRemiFaso",  comment:"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor."},
-        {id:5, image: "https://bootdey.com/img/Content/avatar/avatar3.png", name:"Maria More More",  comment:"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor."},
-        {id:6, image: "https://bootdey.com/img/Content/avatar/avatar4.png", name:"Clark June Boom!", comment:"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor."},
-        {id:7, image: "https://bootdey.com/img/Content/avatar/avatar5.png", name:"The googler",      comment:"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor."},
-      ],
-      makanan: '',
+        slider1ActiveSlide: SLIDER_1_FIRST_ITEM,
+        data: [
+                {id:1, colsi: require('@images/c1.jpg'),namawarung : 'Warung Bu Mian',namaproduct: 'Nasi Goreng',  jarak:'9 KM', harga:'Rp 10.000',like:'10',comment:'40',logo:'500'},
+                {id:2, colsi: require('@images/c2.jpg'),namawarung : 'Warung Bu Takbir',namaproduct: 'Nasi Kebuli',  jarak:'19 KM', harga:'Rp 12.000',like:'2',comment:'20',logo:'52'},
+                {id:3, colsi: require('@images/c3.jpg'),namawarung : 'Warung Bu Budi',namaproduct: 'Empal Gentong',  jarak:'5 KM', harga:'Rp 15.000' ,like:'100',comment:'2',logo:'250'},
+                {id:4, colsi: require('@images/c4.jpg'),namawarung : 'Warung Bu Siti',namaproduct: 'Telor Ceplok' ,  jarak:'7 KM', harga:'Rp 14.000',like:'24',comment:'24',logo:'33'},
+                {id:5, colsi: require('@images/c5.jpg'),namawarung : 'Warung Bu Desi',namaproduct: 'Kentang Goreng' ,  jarak:'3 KM', harga:'Rp 117.000',like:'33',comment:'120',logo:'44'},
+                {id:6, colsi: require('@images/c6.jpg'),namawarung : 'Warung Kopi',namaproduct: 'Jajanan Malam' ,  jarak:'1 KM', harga:'Rp 153.000',like:'1',comment:'60',logo:'553'},
+                {id:7, colsi: require('@images/c7.jpg'),namawarung : 'Warung Pak Ndut',namaproduct: 'Nasi Betawi',  jarak:'10 KM', harga:'Rp 15.000' ,like:'9',comment:'80',logo:'77'},
+                {id:8, colsi: require('@images/c8.jpg'),namawarung : 'Warung Pak Mirsun',namaproduct: 'Kangkung',  jarak:'2 KM', harga:'Rp 1.000',like:'10',comment:'33',logo:'32'}
+              ],
+              comment:[
+                {id:1, image: "https://bootdey.com/img/Content/avatar/avatar1.png", name:"Frank Odalthh",    comment:"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor."},
+                {id:2, image: "https://bootdey.com/img/Content/avatar/avatar6.png", name:"John DoeLink",     comment:"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor."},
+                {id:3, image: "https://bootdey.com/img/Content/avatar/avatar7.png", name:"March SoulLaComa", comment:"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor."},
+                {id:4, image: "https://bootdey.com/img/Content/avatar/avatar2.png", name:"Finn DoRemiFaso",  comment:"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor."},
+                {id:5, image: "https://bootdey.com/img/Content/avatar/avatar3.png", name:"Maria More More",  comment:"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor."},
+                {id:6, image: "https://bootdey.com/img/Content/avatar/avatar4.png", name:"Clark June Boom!", comment:"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor."},
+                {id:7, image: "https://bootdey.com/img/Content/avatar/avatar5.png", name:"The googler",      comment:"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor."},
+              ],
+               modalVisible: false,
     };
-   // alert(this.props.idwarung);  // kiriman dari depan routers
-  }
-  
+
+
+}
+
 
  componentDidMount() {
     Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT); 
@@ -68,142 +65,214 @@ export default class MakananDetail extends Component {
     Actions.Login(); 
     return true; 
   }
-
-orderMakananDetail(){  
+  orderMakananDetail(){  
    this.loadingButton.showLoading(true);
      setTimeout(() => {
              this.loadingButton.showLoading(false);
         }, 2000);
   }
 
- _renderItem ({item, index}) {
+   _renderItemHeader ({item, index}){
         return (
-            <View style={styles.slide}> 
-               <View  style={{flex: 1,alignSelf: 'stretch' , backgroundColor: '#FFFFFF'}} source={item.colsimage} >                     
-                   <ImageBackground  style={{borderRadius:50,flex: 1,alignSelf: 'stretch'}} source={item.colsimage} />                     
-                   <View style={{flexDirection: 'row'}}>
-                      <Text style={material.body2 ,{ flex: 2 }}>Warung Bu Mian</Text>                                    
-                   </View>
-                   <View >
-                      <Text style={material.caption}>Nasi goreng</Text> 
-                   </View>    
-
-                   <View style={{flexDirection: 'row',justifyContent: 'flex-end',paddingRight: 15}}>
-                        <View style={{ flex : 1,}} >
-                              <Text style={{ flex: 1 , paddingTop:2,fontSize: 10, color: iOSColors.red,  textAlign: 'left',}}>
-                                {item.harga}
-                              </Text>   
-                        </View>
-                      
-                                <ImageBackground style={{width: 20, height: 20,textAlign: 'right', }}  source={require('@images/like.png')}>
-                                    <Text  style={{color: iOSColors.white, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>130</Text>
-                                </ImageBackground>  
-                                <ImageBackground style={{ width: 20, height: 20, textAlign: 'right', }}  source={require('@images/comment.png')}>
-                                  <Text  style={{ color: iOSColors.white, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>100</Text>
-                                </ImageBackground>  
-                                 <ImageBackground style={{ width: 20, height: 20, textAlign: 'right', }}  source={require('@images/logo.png')}>
-                                  <Text  style={{ color: iOSColors.white, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>100</Text>
-                                </ImageBackground> 
-                                <View style={{ paddingRight:28,}}>                                 
-                                  <View style={{ flex: 2, flexDirection: 'row',  justifyContent: 'center',}}>
-                                      <View>
-                                         <Text style={{ flex: 1 , paddingTop:2,fontSize: 10, color: iOSColors.lightgray,  textAlign: 'right', paddingRight:20 ,}}>
-                                             ({item.jarak})
-                                          </Text> 
-                                      </View>
-                                      <View style={{ justifyContent: 'center'}}>
-                                             <Text style={styles.headerColsAll}>Detail</Text>                               
-                                      </View>
-
-                                      <View style={{ justifyContent: 'center'}}>       
-                                       <TouchableOpacity style={{  width:15 , height: 15,}} source={require('@images/next.png')} >                                    
-                                          <Image style={{  width:15 , height: 15,}} source={require('@images/next.png')} />    
-                                        </TouchableOpacity>                                   
-                                      </View>                                                      
-                                  </View>
-                                </View>  
-                       
-                    </View>
-              </View>
-            </View>
+            <TouchableOpacity key={index} >
+                <ImageBackground  style = {styles.image} source = { item.colsi } >
+                              <View style={{ flex: 1 , flexDirection: 'column' , paddingBottom: 25}}>
+                              </View>
+                              <View style={{
+                                            flex: 1 , 
+                                            flexDirection: 'column' , 
+                                            justifyContent: 'flex-end',
+                                            alignItems: 'flex-start',
+                                            backgroundColor: 'rgba(52, 52, 52, 0.8)',
+                                            paddingHorizontal: 3,
+                                            }}>
+                                      
+                                            <View style={{flexDirection: 'row' }}>
+                                                <Text style={material.body2 ,{ flex: 2 ,}}>Warung Bu Mian</Text>                                    
+                                            </View>
+                                            <View style={{flexDirection: 'row' }}>
+                                                <Text style={material.caption,{ flex: 2 }}>Nasi goreng</Text>   
+                                            </View>   
+                                             <View style={{flexDirection: 'row'}}>
+                                                <Text style={material.caption,{ flex: 2 }}>Jln. Jendral Sudirman No.34 Depan Sma</Text>    
+                                            </View> 
+                                            <View style={{flexDirection: 'row',justifyContent: 'flex-end',paddingRight: 15}}>
+                                                  <View style={{ flex : 1,}} >
+                                                        <Text style={{ flex: 1 , paddingTop:2,fontSize: 10, color: iOSColors.red,  textAlign: 'left',}}>
+                                                         {item.harga}
+                                                        </Text>   
+                                                  </View>                                  
+                                                          <ImageBackground style={{width: 20, height: 20,textAlign: 'right', }}  source={require('@images/like.png')}>
+                                                              <Text  style={{color: iOSColors.white, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>{item.like}</Text>
+                                                          </ImageBackground>  
+                                                          <ImageBackground style={{ width: 20, height: 20, textAlign: 'right', }}  source={require('@images/comment.png')}>
+                                                            <Text  style={{ color: iOSColors.white, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>{item.comment}</Text>
+                                                          </ImageBackground>  
+                                                           <ImageBackground style={{ width: 20, height: 20, textAlign: 'right', }}  source={require('@images/logo.png')}>
+                                                            <Text  style={{ color: iOSColors.white, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>{item.logo}</Text>
+                                                          </ImageBackground> 
+                                                          <View>
+                                                            <Text style={{ flex: 1 , paddingTop:2,fontSize: 10, color: iOSColors.lightgray,  textAlign: 'right',}}>
+                                                               ({item.jarak})
+                                                            </Text> 
+                                                          </View> 
+                                            </View>
+                                 </View>
+                                         
+                </ImageBackground>                
+            </TouchableOpacity>
         );
     }
 
  
- 
-
   render() {
     return (
-    <View   style={styles.container} >   
-          <View style={styles.header}>
-           <Carousel 
-              ref={(c1) => { this._carousel = c1; }}
-              data={this.state.data}
-              renderItem={this._renderItem.bind(this)}
-              layout={'stack'}
-              layoutCardOffset={'18'} 
-              firstItem={0}
-              sliderWidth={SLIDER_WIDTH}
-              itemWidth={ITEM_WIDTH}
-              activeSlideAlignment={'start'}
-              useScrollView={true}
-              
-            />
-          </View>    		
-           <ScrollView>       
-                <View style={styles.containerDetail}>  
-                        <View style={{ paddingTop: 5, borderColor: '#4d4d4f', borderBottomWidth: 3,}}>
-                                <Text style={styles.name}>Makanan Tradisonal</Text>
-                        </View>
-                        <View style={{flex: 2, flexDirection: 'row', alignItems: 'stretch', 
-                                               borderBottomColor: '#d3d2cb',  
-                                               borderBottomWidth: 2}}>
-                                <View style={{borderBottomColor: '#d3d2cb',  
+    <ImageBackground   style={styles.container} >   
+          <View style={styles.formContent}>
+            <View style={styles.inputContainer}>
+              <Image style={[styles.icon, styles.inputIcon]} source={require('@images/search.png')}/>
+              <TextInput style={styles.inputs}
+                  ref={'txtPassword'}
+                  placeholder="Search"
+                  underlineColorAndroid='transparent'
+                  onChangeText={(makanan) => this.setState({makanan})}
+                  />              
+            </View>
+            <IconBadge
+                        MainElement={
+                          <View style={{ backgroundColor: "#ffffff", borderRadius: 100,  }}>
+                             <Image source={require('@images/lonceng.png')}  style={styles.actionButtonIconNotif}  />
+                          </View>
+                        }
+                        BadgeElement={
+                             <Text style={{color:'#FFFFFF' , fontSize: 10,}}>3</Text>
+                        }
+                        IconBadgeStyle={
+                          {
+                            width:17,
+                            height:17,
+                            backgroundColor: '#ff0000'
+                          }
+                        }
+                        Hidden={this.state.BadgeCount==0}
+              />
+          </View>
+          <View style={styles.header}>                
+                <Carousel
+                    ref={c => this._slider1Ref = c}
+                    data={this.state.data}
+                    renderItem={this._renderItemHeader.bind(this)}
+                    sliderWidth={sliderWidth}
+                    itemWidth={itemWidth}
+                    firstItem={SLIDER_1_FIRST_ITEM}
+                    inactiveSlideScale={0.80}
+                    activeSlideAlignment={'start'}
+                    inactiveSlideOpacity={0.7}
+                    inactiveSlideShift={0.6}
+                    containerCustomStyle={styles.slider}
+                    contentContainerCustomStyle={styles.sliderContentContainer}
+                    loop={true}
+                    loopClonesPerSide={3}
+                    autoplay={true}
+                    autoplayDelay={2000}
+                    autoplayInterval={4000}     
+                />
+          </View>
+          <View>
+               <ScrollView> 
+                   <View style={styles.containerDetail}>                        
+                        <View style={{flex: 1, 
+                                      flexDirection: 'row', 
+                                      alignItems: 'stretch', 
+                                      borderBottomColor: '#d3d2cb',  
+                                      borderBottomWidth: 2}}>
+                                      <View style={{ borderBottomColor: '#d3d2cb',  
                                                borderBottomWidth: 2, 
                                                marginBottom: 5,
-                                                borderTopColor: '#d3d2cb',  
+                                               borderTopColor: '#d3d2cb',  
                                                borderTopWidth: 2,                                              
-                                             borderRightColor: '#d3d2cb',  
+                                               borderRightColor: '#d3d2cb',  
                                                borderRightWidth: 2, }}> 
-                                    <Image style={styles.productImg} source={this.state.data[1].colsimage}/>
-
-                                    <View style={{flexDirection: 'row',justifyContent: 'center',marginHorizontal:10,paddingBottom:5, textAlign: 'center',}}>
-                                              <View style={{flexDirection: 'column'}}>
-                                                  <ImageBackground style={{width: 20, height: 20,textAlign: 'center', }}  source={require('@images/like.png')} />                                                
-                                                  <Text  style={{ justifyContent: 'center' ,color: iOSColors.black, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>130</Text>
+                                               <Image style={styles.productImg} source={this.state.data[1].colsi}/>
+                                               <View style={{flexDirection: 'row',
+                                                          justifyContent: 'center',
+                                                          marginHorizontal:10,
+                                                          paddingBottom:5, 
+                                                          textAlign: 'center',}}>
+                                                      <View style={{flexDirection: 'column'}}>
+                                                          <ImageBackground style={{width: 20, height: 20,textAlign: 'center', }}  source={require('@images/like.png')} />                                                
+                                                          <Text  style={{ justifyContent: 'center' ,color: iOSColors.black, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>130</Text>
+                                                      </View>
+                                                      <View style={{flexDirection: 'column'}}>
+                                                          <ImageBackground style={{width: 20, height: 20,textAlign: 'center', }}  source={require('@images/comment.png')} />                                                
+                                                          <Text  style={{ justifyContent: 'center' ,color: iOSColors.black, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>130</Text>
+                                                      </View>
+                                                      <View style={{flexDirection: 'column'}}>
+                                                          <ImageBackground style={{width: 20, height: 20,textAlign: 'center', }}  source={require('@images/logo.png')} />                                                
+                                                          <Text  style={{ justifyContent: 'center' ,color: iOSColors.black, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>130</Text>
+                                                      </View>                                                                                                 
                                               </View>
-                                              <View style={{flexDirection: 'column'}}>
-                                                  <ImageBackground style={{width: 20, height: 20,textAlign: 'center', }}  source={require('@images/comment.png')} />                                                
-                                                  <Text  style={{ justifyContent: 'center' ,color: iOSColors.black, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>130</Text>
-                                              </View>
-                                               <View style={{flexDirection: 'column'}}>
-                                                  <ImageBackground style={{width: 20, height: 20,textAlign: 'center', }}  source={require('@images/logo.png')} />                                                
-                                                  <Text  style={{ justifyContent: 'center' ,color: iOSColors.black, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>130</Text>
-                                              </View>                                                                                                 
                                     </View>
-
-                                </View>
-
-                                <View>
-                                    <View>
-                                        <Text style={styles.headerCols}>Nasi Goreng</Text>                                   
-                                        <Text style={styles.price}>Rp. 10.000</Text>
-                                         <AnimateLoadingButton
-                                            ref={c => (this.loadingButton = c)}
-                                            width={100}
-                                            height={20}
-                                            title="Order"
-                                            titleFontSize={16}
-                                            titleColor="rgb(255,255,255)"
-                                            backgroundColor="#00b5ec"
-                                            borderRadius={4}
-                                            onPress={this.orderMakananDetail.bind(this)}
-                                            style={{justifyContent: 'center', textAlign: 'center'}}
-                                          />                   
+                                    <View style={{flex:1,}}>
+                                        <View style={{       flexDirection: 'column',
+                                                             paddingTop: 5, 
+                                                             borderColor: '#4d4d4f', 
+                                                             borderBottomWidth: 2, 
+                                                             backgroundColor : '#66181f',}}>
+                                                      <Text style={styles.headerCols}>Makanan Tradisonal</Text>
+                                        </View>
+                                        <View>
+                                                       <View style={{  flex: 1,    
+                                                                  flexDirection: 'row',    
+                                                                  justifyContent: 'flex-end',
+                                                                  position: 'absolute',
+                                                                  top: 0,
+                                                                  bottom: 6,
+                                                                  left: 0,
+                                                                  right: 6,}}> 
+                                                                  <Text style={styles.headerColsDetailKM}>(10 KM)</Text>  
+                                                        </View>
+                                                      <Text style={styles.headerColsDetail}>Warung Bu Mian</Text>       
+                                                      <Text style={styles.headerColsDetail}>Nasi Goreng</Text>      
+                                                      <Text style={styles.headerColsDetail}>Jln. Jendral Sudirman No.34 Depan SMA</Text>                          
+                                                      <Text style={styles.price}>Rp. 10.000</Text>
+                                                              
+                                                  
+                                        </View>
+                                        <View style={{  flex: 1,    
+                                                                  flexDirection: 'column',    
+                                                                  justifyContent: 'flex-end',
+                                                                  alignItems: 'flex-end',
+                                                                  position: 'absolute',
+                                                                  top: 0,
+                                                                  bottom: 6,
+                                                                  left: 0,
+                                                                  right: 6,}}>                
+                                                      <AnimateLoadingButton
+                                                          ref={c => (this.loadingButton = c)}
+                                                          width={100}
+                                                          height={20}
+                                                          title="Order"
+                                                          titleFontSize={16}
+                                                          titleColor="rgb(255,255,255)"
+                                                          backgroundColor="#00b5ec"
+                                                          borderRadius={4}
+                                                          onPress={this.orderMakananDetail.bind(this)}
+                                                      />      
+                                        </View>             
                                     </View>
-                              </View>
-                        </View>   
-                      <View style={styles.starContainer}>
+                        </View>
+                        <View>
+                            <TextInput style={styles.inputBox}
+                                              underlineColorAndroid='rgba(0,0,0,0)'
+                                              onChangeText={username => this.setState({username})}
+                                              placeholder="Comment"
+                                              placeholderTextColor = "#ffffff"
+                                              onSubmitEditing={() => this.password.focus()}
+                                              ref={(input) => this.username = input }
+                                            />
+                        </View>
+                        <View style={styles.starContainer}>
                           <FlatList
                               style={styles.rootC}
                               data={this.state.comment}
@@ -236,49 +305,49 @@ orderMakananDetail(){
                                 );
                               }}/>
                       </View>
-                     
-              </View>             
-        </ScrollView>
-     </View>
+                   </View>
+              </ScrollView>
+          </View>
+              <View style={{ flex: 1,    
+                              flexDirection: 'column',    
+                              justifyContent: 'flex-end',
+                              alignItems: 'flex-end',
+                              position: 'absolute',
+                              top: 0,
+                              bottom: 6,
+                              left: 0,
+                              right: 6,}}>   
+                    <ActionButton buttonColor="rgba(231,76,60,1)">
+                      <ActionButton.Item buttonColor='#3498db' title="Home" onPress={() => {this.backAndroid()}}>
+                         <Image source={require('@images/house.png')}  style={styles.actionButtonIcon}  />
+                      </ActionButton.Item>
+                      <ActionButton.Item buttonColor='#8e2600' title="Keluar" onPress={() => {this.backAndroid()}}>
+                         <Image source={require('@images/signaling.png')}  style={styles.actionButtonIcon}  />
+                      </ActionButton.Item>                          
+                    </ActionButton>
+              </View>       
+              < View style = {{
+                                        flex: 1,
+                                        flexDirection: 'row',
+                                        justifyContent: 'flex-start',
+                                        alignItems: 'flex-end', 
+                                        position: 'absolute',
+                                        top: 0,
+                                        bottom: 6,
+                                        left: 0,
+                                        right: 6,
+                                       }} >
+                                     
+                             </View>        
+     </ImageBackground>
+
     );
   }
 }
 
-
-const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
-const SLIDE_WIDTH = Math.round(viewportWidth);
-const SLIDE_HEIGHT = Math.round(viewportHeight / 4);
-
-const ITEM_HORIZONTAL_MARGIN = 15;
-const ITEM_WIDTH = SLIDE_WIDTH + ITEM_HORIZONTAL_MARGIN * 2;
-const ITEM_HEIGHT = SLIDE_HEIGHT + ITEM_HORIZONTAL_MARGIN * 2;
-const SLIDER_WIDTH = viewportWidth;
-
-
-
 const styles = StyleSheet.create({
-   headerCols: {
-    fontSize: 18,
-    color: '#696969',
-  },
-  headerColsAll: {
-    fontSize: 13,
-    color: iOSColors.green,
-    textAlign: 'right',
-    paddingRight: 5,
-  },
-   slide: {
-        width: ITEM_WIDTH,
-        height: ITEM_HEIGHT,
-       
-    },
-header:{  
-    flexDirection: 'row',
-    marginTop:20,
-    backgroundColor: '#FFFFFF',
-    borderBottomColor: 'red',
-    borderBottomWidth: 2,
-    marginBottom: 3,
+header:{
+    backgroundColor: "#ffffff",
   },
   headerContent:{
     padding:30,
@@ -292,28 +361,36 @@ header:{
     borderColor: "#cc181e",
     marginBottom:10,
   },
-   container: {
+  name:{
+    fontSize:22,
+    color:"#cc181e",
+    fontWeight:'600',
+  },
+  container: {
      flex: 1,
-    backgroundColor: '#000000',
+    backgroundColor: '#FFFFFF',
     
   },
-  containerDetail: {
-     flex:1,
-      backgroundColor: '#FFFFFF'
+  signupInput: {
+     flexGrow: 1,
+      alignItems: 'flex-end',
+      justifyContent: 'center',
+      paddingVertical: 2,
+      flexDirection: 'row'
   },
   item: {
     flex: 1,
-    height: 95,
-    margin: 1,
-    backgroundColor: 'white',
+    height: 80,
+    margin: 1,    
+    backgroundColor:'#d7ede7',
     borderWidth: 0.5,
     borderColor: '#d6d7da',
     justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
   },
   list: {
-      flex: 1,
-      backgroundColor:'rgba(25,25,25,0.3)',
-     
+      flex: 1,     
   },
   blurImage:
     {
@@ -343,6 +420,67 @@ header:{
      justifyContent: 'center',
      color : 'white',
   },
+   slider: {
+        marginTop: 0,
+        overflow: 'visible' 
+    },
+     sliderContentContainer: {
+        paddingVertical: 0 
+    },
+     image: {
+        resizeMode: 'cover',
+        height: Dimensions.get('window').width / 2,
+        width: Dimensions.get('window').width
+    },
+    actionButtonIcon: {
+      fontSize: 20,
+      height: 40,
+      width: 40,
+      color: 'white',
+    },
+    actionButtonIconNotif: {
+      fontSize: 8,
+      height: 39,
+      width: 39,
+      color: 'white',        
+    },
+    formContent:{
+    flexDirection: 'row',
+    marginTop:20,
+    backgroundColor: '#FFFFFF',
+  },
+  inputContainer: {
+      backgroundColor:'rgba(25,25,25,0.0)',
+      borderRadius:10,
+      borderBottomWidth: 3,
+      borderBottomColor:  '#000000',
+      height:30,
+      flexDirection: 'row',
+      alignItems:'center',
+      flex:1,
+      margin:5,
+  },
+  icon:{
+    width:30,
+    height:30,
+  },
+  iconBtnSearch:{
+    alignSelf:'center'
+  },
+   inputs:{
+      height:35,
+      marginLeft:16,
+      borderBottomColor: '#FFFFFF',
+      flex:1,
+  },
+  inputIcon:{
+    marginLeft:15,
+    justifyContent: 'center'
+  },
+   containerDetail: {
+     flex:1,
+      backgroundColor: '#FFFFFF'
+  },
   productImg:{
     borderRadius: 10,
     width:100,
@@ -351,85 +489,33 @@ header:{
     marginVertical: 5,
 
   },
-  name:{
-    fontSize:25,
-    color:"#696969",
-    fontWeight:'bold',   
-    paddingLeft: 5,
+   headerCols: {
+    fontSize: 15,
+    color: iOSColors.green,
+    paddingLeft: 3,
+  },
+  headerColsDetail:{
+    fontSize: 13,
+    color: material.body2,
+    paddingLeft: 3,
+  },
+  headerColsDetailKM:{
+    fontSize: 13,
+    color: material.body2,
+    paddingLeft: 3,
+    fontWeight: 'bold',
   },
   price:{
     fontSize:18,
     color:"red",
     fontWeight:'bold',
-    paddingLeft: 5,
+    paddingLeft: 3,
   },
-  description:{
-    textAlign:'center',
-    marginTop:10,
-    color:"#696969",
-  },
-  star:{
-    width:40,
-    height:40,
-  },
-  btnColor: {
-    height:30,
-    width:30,
-    borderRadius:30,
-    marginHorizontal:3
-  },
-  btnSize: {
-    height:40,
-    width:40,
-    borderRadius:40,
-    borderColor:'#778899',
-    borderWidth:1,
-    marginHorizontal:3,
-    backgroundColor:'white',
-
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  starContainer:{
+   starContainer:{
     justifyContent:'center', 
     marginHorizontal:30, 
     flexDirection:'row', 
     marginTop:20,    
-  },
-  contentColors:{ 
-    justifyContent:'center', 
-    marginHorizontal:30, 
-    flexDirection:'row', 
-    marginTop:20
-  },
-  contentSize:{ 
-    justifyContent:'center', 
-    marginHorizontal:30, 
-    flexDirection:'row', 
-    marginTop:20
-  },
-  separator:{
-    height:2,
-    backgroundColor:"#eeeeee",
-    marginTop:20,
-    marginHorizontal:30
-  },
-  shareButton: {
-    marginTop:10,
-    height:45,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius:30,
-    backgroundColor: "#00BFFF",
-  },
-  shareButtonText:{
-    color: "#FFFFFF",
-    fontSize:20,
-  },
-  addToCarContainer:{
-    marginHorizontal:30
   },
   rootC: {
     backgroundColor: "#ffffff",
@@ -469,4 +555,19 @@ header:{
     fontSize:16,
     fontWeight:"bold",
   },
+    inputBox: {
+    width : 300,
+    height: 50,
+    backgroundColor:'rgba(25,25,25,0.0)',
+    borderRadius : 15,
+    borderBottomWidth: 3,
+    borderBottomColor:  '#000000',
+    paddingHorizontal: 16,
+    fontSize:16,
+    color:'#ffffff',
+    marginVertical: 10
+  },
 });
+
+
+

@@ -10,7 +10,7 @@ import ActionButton from 'react-native-action-button';
 import IconBadge from 'react-native-icon-badge';
 import { material , iOSUIKit , iOSColors , systemWeights } from 'react-native-typography';
 
-const items = [
+const items = [ 
   { thumbnail: {  uri : require('@images/panganan.png'   ) , mulai: 'Sega' ,buuton:'Makanan'} },
   { thumbnail: {  uri : require('@images/wedang.png'    ) , mulai: 'Wedang',buuton:'Minuman'} },
   { thumbnail: {  uri : require('@images/warung.png'      ) , mulai: 'Warung',buuton:'Toko'} },
@@ -26,7 +26,7 @@ const itemWidth = viewportWidth;
 
 export default class Dasbord extends Component { 
  constructor(props) {
-    super(props); 
+    super(props);  
     this.state = {
         slider1ActiveSlide: SLIDER_1_FIRST_ITEM,
         data: [
