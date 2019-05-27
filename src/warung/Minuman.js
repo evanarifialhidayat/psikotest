@@ -9,27 +9,81 @@ import {
   ScrollView,
   FlatList,
   Button,
-  TextInput
+  TextInput,Dimensions,
+  ImageBackground,
+  TouchableHighlight
 } from 'react-native';
-
+import Carousel from 'react-native-snap-carousel';
+import { material , iOSUIKit , iOSColors , systemWeights } from 'react-native-typography';
+import { Actions } from 'react-native-router-flux';
+import ActionButton from 'react-native-action-button';
+import IconBadge from 'react-native-icon-badge';
 export default class Minuman extends Component {
   constructor(props) {
     super(props);
     this.state = {
       data: [
-        {id:1, foto: require('@images/1.jpg' )  , name: "Mba Epi",             jarak:"1 KM",    image:require('@images/m1.jpg' ) },
-        {id:2, foto: require('@images/2.jpg' )  , name: "Mba Rrna",             jarak:"2 KM", image:require('@images/m2.jpg' ) },
-        {id:3, foto: require('@images/3.jpg' )  , name: "Mba Tati ",            jarak:"3 KM",   image:require('@images/m3.jpg' ) },
-        {id:4, foto: require('@images/4.jpg' )  , name: "Warung Bu Slamet",         jarak:"4 KM",  image:require('@images/m4.jpg' ) },
-        {id:5, foto: require('@images/5.jpg' )  , name: "Mba Wah",           jarak:"5 KM",   image:require('@images/m5.jpg' ) },
-        {id:6, foto: require('@images/6.jpg' )  , name: "Mba Mian",        jarak:"6 KM",    image:require('@images/m6.jpg' ) },
-        {id:7, foto: require('@images/7.jpg' )  , name: "Warung Bu Yunus",    jarak:"7 KM",image:require('@images/m7.jpg' ) },
-        {id:8, foto: require('@images/8.jpg' )  , name: "Angkringan Abu",          jarak:"8 KM",   image:require('@images/m8.jpg' ) },
-        {id:9, foto: require('@images/9.jpg' )  , name: "Felis", jarak:"9 KM", image:require('@images/m9.jpg' ) },
+        {id:1, harga:"Rp. 10.000", name: "Warung Bu Jarwo",     jarak:"1 KM", colsimage:require('@images/m1.jpg' )},
+        {id:2, harga:"Rp. 20.000", name: "Warung Bu Ida",       jarak:"2 KM", colsimage:require('@images/m2.jpg' )},
+        {id:3, harga:"Rp. 5.000",  name: "Warung Bu Gureng ",   jarak:"3 KM", colsimage:require('@images/m3.jpg' )},
+        {id:4, harga:"Rp. 11.000", name: "Warung Bu Slamet",    jarak:"4 KM", colsimage:require('@images/m4.jpg' )},
+        {id:5, harga:"Rp. 14.000", name: "Mba Wah",             jarak:"5 KM", colsimage:require('@images/m5.jpg' )},
+        {id:6, harga:"Rp. 13.000", name: "Warung Bu Erlin",     jarak:"6 KM", colsimage:require('@images/m6.jpg' )},
+        {id:7, harga:"Rp. 15.000", name: "Warung Bu Yunus",     jarak:"7 KM", colsimage:require('@images/m7.jpg' )},
+        {id:8, harga:"Rp. 9.000",  name: "Ridiculus mus",       jarak:"8 KM", colsimage:require('@images/m8.jpg' )},
+        {id:9, harga:"Rp. 19.000", name: "Felis",               jarak:"9 KM", colsimage:require('@images/m9.jpg' )},
       ],
       makanan: '',
     };
   }
+  
+  onPresMakanan(id){
+   //  Alert.alert('ss'+id);
+   Actions.MinumanDetail({idwarung: id});
+  }
+
+_renderItem ({item, index}) {
+        return (
+            <View style={styles.slide}>    
+              <TouchableOpacity  style={{borderRadius:10,flex: 1,alignSelf: 'stretch'}} source={item.colsimage}
+                onPress={this.onPresMakanan.bind(this,item.id)}
+              >                     
+                   <ImageBackground  style={{borderRadius:10,flex: 1,alignSelf: 'stretch'}} source={item.colsimage} />                     
+                   <View style={{flexDirection: 'row'}}>
+                      <Text style={material.body2 ,{ flex: 2 }}>Warung Bu Mian</Text>                                    
+                   </View>
+                   <View >
+                      <Text style={material.caption}>Nasi goreng</Text>   
+                      <Text style={material.caption}>Jln. Jendral Sudirman No.34 Depan Sma</Text>    
+                   </View>    
+
+                   <View style={{flexDirection: 'row',justifyContent: 'flex-end',paddingRight: 15}}>
+                        <View style={{ flex : 1,}} >
+                              <Text style={{ flex: 1 , paddingTop:2,fontSize: 10, color: iOSColors.red,  textAlign: 'left',}}>
+                                {item.harga}
+                              </Text>   
+                        </View>
+                      
+                                <ImageBackground style={{width: 20, height: 20,textAlign: 'right', }}  source={require('@images/like.png')}>
+                                    <Text  style={{color: iOSColors.white, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>130</Text>
+                                </ImageBackground>  
+                                <ImageBackground style={{ width: 20, height: 20, textAlign: 'right', }}  source={require('@images/comment.png')}>
+                                  <Text  style={{ color: iOSColors.white, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>100</Text>
+                                </ImageBackground>  
+                                 <ImageBackground style={{ width: 20, height: 20, textAlign: 'right', }}  source={require('@images/logo.png')}>
+                                  <Text  style={{ color: iOSColors.white, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>100</Text>
+                                </ImageBackground> 
+                                <View>
+                                  <Text style={{ flex: 1 , paddingTop:2,fontSize: 10, color: iOSColors.lightgray,  textAlign: 'right',}}>
+                                     ({item.jarak})
+                                  </Text> 
+                                </View>  
+                       
+                    </View>
+              </TouchableOpacity>
+            </View>
+        );
+    }
 
   render() {
     return (
@@ -44,62 +98,171 @@ export default class Minuman extends Component {
                 onChangeText={(makanan) => this.setState({makanan})}
                 />
           </View>
+           <IconBadge
+                        MainElement={
+                          <View style={{ backgroundColor: "#ffffff", borderRadius: 100,  }}>
+                             <Image source={require('@images/lonceng.png')}  style={styles.actionButtonIconNotif}  />
+                          </View>
+                        }
+                        BadgeElement={
+                             <Text style={{color:'#FFFFFF' , fontSize: 10,}}>3</Text>
+                        }
+                        IconBadgeStyle={
+                          {
+                            width:17,
+                            height:17,
+                            backgroundColor: '#ff0000'
+                          }
+                        }
+                        Hidden={this.state.BadgeCount==0}
+              />
         </View>
-        <FlatList style={styles.list}
-          data={this.state.data}
-          keyExtractor= {(item) => {
-            return item.id;
-          }}
-          ItemSeparatorComponent={() => {
-            return (
-              <View style={styles.separator}/>
-            )
-          }}
-          renderItem={(post) => {
-            const item = post.item;
-            return (
-              <View style={styles.card}>               
-               <View style={styles.cardHeader}>                   
-		             <Image style={styles.image}  source={item.foto}/>		                
-		             <Text style={styles.title}>{item.name}</Text>
-                     <Text style={styles.time}>{item.jarak}</Text>
-                </View>
-                <Image style={styles.cardImage} source={item.image}/>
-                
-                <View style={styles.cardFooter}>
-                  <View style={styles.socialBarContainer}>
-                    <View style={styles.socialBarSection}>
-                      <TouchableOpacity style={styles.socialBarButton}>
-                        <Image style={styles.icon}  source={require('@images/like.png')}/>
-                        <Text style={styles.socialBarLabel}>78</Text>
-                      </TouchableOpacity>
+
+      <ScrollView>
+        <View style={{backgroundColor: '#FFFFFF'}}>
+            <View style={{ height: 20, flexDirection: 'row',paddingVertical: 5, 
+                            paddingHorizontal: 2, paddingBottom:15 ,paddingTop: 10, 
+                            borderColor: '#4d4d4f', borderBottomWidth: 2, backgroundColor : '#5acea6',}}>
+                    <View style={{ flex: 8,  justifyContent: 'center'}}>
+                        <Text style={styles.headerCols}>Minuman Tradisonal</Text>
                     </View>
-                    <View style={styles.socialBarSection}>
-                      <TouchableOpacity style={styles.socialBarButton}>
-                        <Image style={styles.icon}  source={require('@images/logo.png')}/>
-                        <Text style={styles.socialBarLabel}>25</Text>
-                      </TouchableOpacity>
+
+                   <View style={{ flex: 2, flexDirection: 'row',  justifyContent: 'center',}}>
+                        <View style={{ justifyContent: 'center'}}>
+                               <Text style={styles.headerColsAll}>Lainnya</Text>                               
+                        </View>
+
+                        <View style={{ justifyContent: 'center'}}>       
+                         <TouchableOpacity style={{  width:15 , height: 15,}} source={require('@images/next.png')} >                                    
+                            <Image style={{  width:15 , height: 15,}} source={require('@images/next.png')} />    
+                          </TouchableOpacity>                                   
+                        </View>                                                      
                     </View>
-                    <View style={styles.socialBarSection}>
-                      <TouchableOpacity style={styles.socialBarButton}>
-                        <Image style={styles.icon}  source={require('@images/comment.png')}/>
-                        <Text rkType='primary4 hintColor' style={styles.socialBarLabel}>13</Text>
-                      </TouchableOpacity>
+            </View>
+            <Carousel 
+              ref={(c1) => { this._carousel = c1; }}
+              data={this.state.data}
+              renderItem={this._renderItem.bind(this)}
+              layout={'default'}
+              firstItem={0}
+              sliderWidth={SLIDER_WIDTH}
+              itemWidth={ITEM_WIDTH}
+              activeSlideAlignment={'start'}
+              inactiveSlideScale={1}
+              inactiveSlideOpacity={1}
+              enableMomentum={true}    
+            />
+
+            <View style={{ height: 20, flexDirection: 'row',paddingVertical: 5, 
+                            paddingHorizontal: 2, paddingBottom:15 ,paddingTop: 10, 
+                            borderColor: '#4d4d4f', borderBottomWidth: 2, backgroundColor : '#5acea6',}}>
+                    <View style={{ flex: 8,  justifyContent: 'center'}}>
+                        <Text style={styles.headerCols}>Minuman Melenial</Text>
                     </View>
-                  </View>
-                </View>
-              </View>
-            )
-          }}/>
+                    <View style={{ flex: 2, flexDirection: 'row',  justifyContent: 'center',}}>
+                        <View style={{ justifyContent: 'center'}}>
+                             <Text style={styles.headerColsAll}>Lainnya</Text>
+                        </View>
+                        <View style={{ justifyContent: 'center'}}>       
+                         <TouchableOpacity style={{  width:15 , height: 15,}} source={require('@images/next.png')} >                                    
+                            <Image style={{  width:15 , height: 15,}} source={require('@images/next.png')} />    
+                          </TouchableOpacity>                                   
+                        </View>                        
+                    </View>
+            </View> 
+          <Carousel 
+              ref={(c2) => { this._carousel = c2; }}
+              data={this.state.data}
+              renderItem={this._renderItem.bind(this)}
+              layout={'default'}
+              firstItem={0}
+                sliderWidth={SLIDER_WIDTH}
+                itemWidth={ITEM_WIDTH}
+                activeSlideAlignment={'start'}
+                inactiveSlideScale={1}
+                inactiveSlideOpacity={1}
+                enableMomentum={true}  
+            />
+
+            <View style={{ height: 20, flexDirection: 'row',paddingVertical: 5, 
+                            paddingHorizontal: 2, paddingBottom:15 ,paddingTop: 10, 
+                            borderColor: '#4d4d4f', borderBottomWidth: 2, backgroundColor : '#5acea6',}}>
+                    <View style={{ flex: 8,  justifyContent: 'center'}}>
+                        <Text style={styles.headerCols}>Minuman Unik Tradisonal</Text>
+                    </View>
+                    <View style={{ flex: 2, flexDirection: 'row',  justifyContent: 'center',}}>
+                        <View style={{ justifyContent: 'center'}}>
+                             <Text style={styles.headerColsAll}>Lainnya</Text>
+                        </View>
+                        <View style={{ justifyContent: 'center'}}>       
+                         <TouchableOpacity style={{  width:15 , height: 15,}} source={require('@images/next.png')} >                                    
+                            <Image style={{  width:15 , height: 15,}} source={require('@images/next.png')} />    
+                          </TouchableOpacity>                                   
+                        </View>                              
+                    </View>
+            </View> 
+          <Carousel 
+              ref={(c3) => { this._carousel = c3; }}
+              data={this.state.data}
+              renderItem={this._renderItem.bind(this)}
+              layout={'default'}
+              firstItem={0}
+                sliderWidth={SLIDER_WIDTH}
+                itemWidth={ITEM_WIDTH}
+                activeSlideAlignment={'start'}
+                inactiveSlideScale={1}
+                inactiveSlideOpacity={1}
+                enableMomentum={true}  
+            />
+        </View> 
+    </ScrollView>
+         <ActionButton buttonColor="rgba(231,76,60,1)">
+                <ActionButton.Item buttonColor='#3498db' title="Home" onPress={() => {Actions.Dasbord(); }}>
+                   <Image source={require('@images/house.png')}  style={styles.actionButtonIcon}  />
+                </ActionButton.Item>
+                <ActionButton.Item buttonColor='#8e2600' title="Keluar" onPress={() => {Actions.Login(); }}>
+                   <Image source={require('@images/signaling.png')}  style={styles.actionButtonIcon}  />
+                </ActionButton.Item>                          
+              </ActionButton>
       </View>
     );
   }
 }
 
+const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
+const SLIDE_WIDTH = Math.round(viewportWidth / 2.6);
+const ITEM_HORIZONTAL_MARGIN = 15;
+const ITEM_WIDTH = SLIDE_WIDTH + ITEM_HORIZONTAL_MARGIN * 2;
+const SLIDER_WIDTH = viewportWidth;
+
+const horizontalMargin = 10;
+const verticalMargin = 10;
+const slideWidth = 170;
+const slideHeight = 170;
+const sliderWidth = Dimensions.get('window').width;
+const itemWidth = slideWidth + horizontalMargin * 2;
+const itemHeight = slideHeight + verticalMargin * 2;
+
 const styles = StyleSheet.create({
+  headerCols: {
+    fontSize: 15,
+    color: iOSColors.green,
+  },
+  headerColsAll: {
+    fontSize: 13,
+    color: iOSColors.green,
+    textAlign: 'right',
+    paddingRight: 5,
+  },
+   slide: {
+        width: itemWidth,
+        height: itemHeight,
+        paddingHorizontal: 10,
+        paddingVertical: 10,   
+    },
   container:{
     flex:1,
-     backgroundColor: '#191111',
+     backgroundColor: '#FFFFFF',
   },
   list: {
     paddingHorizontal: 10,
@@ -167,6 +330,18 @@ const styles = StyleSheet.create({
     width:25,
     height:25,
   },
+  iconLike: {
+    width:40,
+    height:40,    
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  iconComment: {
+    width:40,
+    height:40,    
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   /******** social bar ******************/
   socialBarContainer: {
     justifyContent: 'center',
@@ -183,6 +358,8 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     alignSelf: 'flex-end',
     justifyContent: 'center',
+    color: iOSColors.green,
+    flex: 1,
   },
   socialBarButton:{
     flexDirection: 'row',
@@ -202,21 +379,27 @@ const styles = StyleSheet.create({
     height:45,
     borderRadius:40,
   },
+   actionButtonIconNotif: {
+      fontSize: 8,
+      height: 39,
+      width: 39,
+      color: 'white',        
+    },
  formContent:{
     flexDirection: 'row',
     marginTop:20,
-    backgroundColor: '#1fba5d',
+    backgroundColor: '#FFFFFF',
   },
   inputContainer: {
-      borderBottomColor: '#F5FCFF',
-      backgroundColor: '#FFFFFF',
-      borderRadius:30,
-      borderBottomWidth: 1,
-      height:37,
+      backgroundColor:'rgba(25,25,25,0.0)',
+      borderRadius:10,
+      borderBottomWidth: 3,
+      borderBottomColor:  '#000000',
+      height:30,
       flexDirection: 'row',
       alignItems:'center',
       flex:1,
-      margin:10,
+      margin:5,
   },
   icon:{
     width:30,
@@ -235,4 +418,10 @@ const styles = StyleSheet.create({
     marginLeft:15,
     justifyContent: 'center'
   },
+  actionButtonIcon: {
+      fontSize: 20,
+      height: 40,
+      width: 40,
+      color: 'white',
+    },
 });  

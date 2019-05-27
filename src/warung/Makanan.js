@@ -24,15 +24,15 @@ export default class Makanan extends Component {
     super(props);
     this.state = {
       data: [
-        {id:1, harga:"Rp. 10.000", foto: require('@images/1.jpg' )  , name: "Warung Bu Jarwo",             jarak:"1 KM"   , colsimage:require('@images/c1.jpg' )},
-        {id:2, harga:"Rp. 20.000", foto: require('@images/2.jpg' )  , name: "Warung Bu Ida",             jarak:"2 KM",      colsimage:require('@images/c2.jpg' )},
-        {id:3, harga:"Rp. 5.000", foto: require('@images/3.jpg' )  , name: "Warung Bu Gureng ",            jarak:"3 KM",   colsimage:require('@images/c3.jpg' )},
-        {id:4, harga:"Rp. 11.000", foto: require('@images/4.jpg' )  , name: "Warung Bu Slamet",         jarak:"4 KM",       colsimage:require('@images/c4.jpg' )},
-        {id:5, harga:"Rp. 14.000", foto: require('@images/5.jpg' )  , name: "Mba Wah",                 jarak:"5 KM",              colsimage:require('@images/c5.jpg' )},
-        {id:6, harga:"Rp. 13.000", foto: require('@images/6.jpg' )  , name: "Warung Bu Erlin",        jarak:"6 KM",         colsimage:require('@images/c6.jpg' )},
-        {id:7, harga:"Rp. 15.000", foto: require('@images/7.jpg' )  , name: "Warung Bu Yunus",        jarak:"7 KM",             colsimage:require('@images/c7.jpg' )},
-        {id:8, harga:"Rp. 9.000", foto: require('@images/8.jpg' )  , name: "Ridiculus mus",          jarak:"8 KM",         colsimage:require('@images/c8.jpg' )},
-        {id:9, harga:"Rp. 19.000", foto: require('@images/9.jpg' )  , name: "Felis",                 jarak:"9 KM",               colsimage:require('@images/c9.jpg' )},
+        {id:1, harga:"Rp. 10.000",  name: "Warung Bu Jarwo",             jarak:"1 KM"   , colsimage:require('@images/c1.jpg' )},
+        {id:2, harga:"Rp. 20.000",  name: "Warung Bu Ida",             jarak:"2 KM",      colsimage:require('@images/c2.jpg' )},
+        {id:3, harga:"Rp. 5.000",  name: "Warung Bu Gureng ",            jarak:"3 KM",   colsimage:require('@images/c3.jpg' )},
+        {id:4, harga:"Rp. 11.000", name: "Warung Bu Slamet",         jarak:"4 KM",       colsimage:require('@images/c4.jpg' )},
+        {id:5, harga:"Rp. 14.000", name: "Mba Wah",                 jarak:"5 KM",              colsimage:require('@images/c5.jpg' )},
+        {id:6, harga:"Rp. 13.000", name: "Warung Bu Erlin",        jarak:"6 KM",         colsimage:require('@images/c6.jpg' )},
+        {id:7, harga:"Rp. 15.000", name: "Warung Bu Yunus",        jarak:"7 KM",             colsimage:require('@images/c7.jpg' )},
+        {id:8, harga:"Rp. 9.000", name: "Ridiculus mus",          jarak:"8 KM",         colsimage:require('@images/c8.jpg' )},
+        {id:9, harga:"Rp. 19.000", name: "Felis",                 jarak:"9 KM",               colsimage:require('@images/c9.jpg' )},
       ],
       makanan: '',
     };

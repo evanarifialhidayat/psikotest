@@ -18,28 +18,28 @@ const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window'
 const sliderWidth = viewportWidth;
 const itemWidth = viewportWidth;
 
-export default class MakananDetail extends Component { 
+export default class MinumanDetail extends Component { 
  constructor(props) {
     super(props);  
     this.state = {
         slider1ActiveSlide: SLIDER_1_FIRST_ITEM,
         data: [
-                {id:1, colsi: require('@images/c1.jpg'),namawarung : 'Warung Bu Mian',namaproduct: 'Nasi Goreng',  jarak:'9 KM', harga:'Rp 10.000',like:'10',comment:'40',logo:'500'},
-                {id:2, colsi: require('@images/c2.jpg'),namawarung : 'Warung Bu Takbir',namaproduct: 'Nasi Kebuli',  jarak:'19 KM', harga:'Rp 12.000',like:'2',comment:'20',logo:'52'},
-                {id:3, colsi: require('@images/c3.jpg'),namawarung : 'Warung Bu Budi',namaproduct: 'Empal Gentong',  jarak:'5 KM', harga:'Rp 15.000' ,like:'100',comment:'2',logo:'250'},
-                {id:4, colsi: require('@images/c4.jpg'),namawarung : 'Warung Bu Siti',namaproduct: 'Telor Ceplok' ,  jarak:'7 KM', harga:'Rp 14.000',like:'24',comment:'24',logo:'33'},
-                {id:5, colsi: require('@images/c5.jpg'),namawarung : 'Warung Bu Desi',namaproduct: 'Kentang Goreng' ,  jarak:'3 KM', harga:'Rp 117.000',like:'33',comment:'120',logo:'44'},
-                {id:6, colsi: require('@images/c6.jpg'),namawarung : 'Warung Kopi',namaproduct: 'Jajanan Malam' ,  jarak:'1 KM', harga:'Rp 153.000',like:'1',comment:'60',logo:'553'},
-                {id:7, colsi: require('@images/c7.jpg'),namawarung : 'Warung Pak Ndut',namaproduct: 'Nasi Betawi',  jarak:'10 KM', harga:'Rp 15.000' ,like:'9',comment:'80',logo:'77'},
-                {id:8, colsi: require('@images/c8.jpg'),namawarung : 'Warung Pak Mirsun',namaproduct: 'Kangkung',  jarak:'2 KM', harga:'Rp 1.000',like:'10',comment:'33',logo:'32'}
+                {id:1, colsi: require('@images/m1.jpg'),namawarung : 'Warung Bu Mian',namaproduct: 'Nasi Goreng',  jarak:'9 KM', harga:'Rp 10.000',like:'10',comment:'40',logo:'500'},
+                {id:2, colsi: require('@images/m2.jpg'),namawarung : 'Warung Bu Takbir',namaproduct: 'Nasi Kebuli',  jarak:'19 KM', harga:'Rp 12.000',like:'2',comment:'20',logo:'52'},
+                {id:3, colsi: require('@images/m3.jpg'),namawarung : 'Warung Bu Budi',namaproduct: 'Empal Gentong',  jarak:'5 KM', harga:'Rp 15.000' ,like:'100',comment:'2',logo:'250'},
+                {id:4, colsi: require('@images/m4.jpg'),namawarung : 'Warung Bu Siti',namaproduct: 'Telor Ceplok' ,  jarak:'7 KM', harga:'Rp 14.000',like:'24',comment:'24',logo:'33'},
+                {id:5, colsi: require('@images/m5.jpg'),namawarung : 'Warung Bu Desi',namaproduct: 'Kentang Goreng' ,  jarak:'3 KM', harga:'Rp 117.000',like:'33',comment:'120',logo:'44'},
+                {id:6, colsi: require('@images/m6.jpg'),namawarung : 'Warung Kopi',namaproduct: 'Jajanan Malam' ,  jarak:'1 KM', harga:'Rp 153.000',like:'1',comment:'60',logo:'553'},
+                {id:7, colsi: require('@images/m7.jpg'),namawarung : 'Warung Pak Ndut',namaproduct: 'Nasi Betawi',  jarak:'10 KM', harga:'Rp 15.000' ,like:'9',comment:'80',logo:'77'},
+                {id:8, colsi: require('@images/m8.jpg'),namawarung : 'Warung Pak Mirsun',namaproduct: 'Kangkung',  jarak:'2 KM', harga:'Rp 1.000',like:'10',comment:'33',logo:'32'}
               ],
               commentlist:[
-                {id:1, image: "https://bootdey.com/img/Content/avatar/avatar1.png", name:"Evan Arifial Hidayat",    comment:"Nasi Goreng Nya Mantap besok gua kesiti lagi.. ada diskon ga nih hehehe"},
+                {id:1, image: "https://bootdey.com/img/Content/avatar/avatar1.png", name:"Evan Arifial Hidayat",    comment:"Minaman Nya Mantap besok gua kesiti lagi.. ada diskon ga nih hehehe"},
                 {id:2, image: "https://bootdey.com/img/Content/avatar/avatar6.png", name:"John DoeLink",            comment:"Nice "},
                 {id:3, image: "https://bootdey.com/img/Content/avatar/avatar7.png", name:"Rendi Akbar Riyadi",      comment:"Tambah Lagi Besok Delivery Yah hehehe"},
-                {id:4, image: "https://bootdey.com/img/Content/avatar/avatar2.png", name:"Nukman Aziz Basalamah",   comment:"Makanan yang simpel, umum dan bisa ditemui dimana-mana. Yang suka makan nasi goreng juga sama, mereka pribadi yang simpel, gak suka ribet dan apa adanya. Orang-orang yang suka nasi goreng bisa dibilang orang-orang yang mainstream banget deh. Kecuali, orang-orang yang suka makan nasi goreng kambing. Mereka berbeda. Para pemakan nasi goreng kambing adalah orang-orang paling asik dan paling keren yang pernah kamu temui."},
+                {id:4, image: "https://bootdey.com/img/Content/avatar/avatar2.png", name:"Nukman Aziz Basalamah",   comment:"Minuman yang simpel, umum dan bisa ditemui dimana-mana. Yang suka makan nasi goreng juga sama, mereka pribadi yang simpel, gak suka ribet dan apa adanya. Orang-orang yang suka nasi goreng bisa dibilang orang-orang yang mainstream banget deh. Kecuali, orang-orang yang suka makan nasi goreng kambing. Mereka berbeda. Para pemakan nasi goreng kambing adalah orang-orang paling asik dan paling keren yang pernah kamu temui."},
                 {id:5, image: "https://bootdey.com/img/Content/avatar/avatar3.png", name:"Maulana",                 comment:"Mantap Markotop ..."},
-                {id:6, image: "https://bootdey.com/img/Content/avatar/avatar4.png", name:"Prabowo",                 comment:"Nasi Goreng ya mantap markotop ... dan mantullllllll"},
+                {id:6, image: "https://bootdey.com/img/Content/avatar/avatar4.png", name:"Prabowo",                 comment:"Minuman ya mantap markotop ... dan mantullllllll"},
                 {id:7, image: "https://bootdey.com/img/Content/avatar/avatar5.png", name:"Jokowiiiiiii",            comment:"GA ENAKKKKKKKK ......."}
               ],
                modalVisible: false,
@@ -216,9 +216,9 @@ export default class MakananDetail extends Component {
                                     <View style={{flex:1,}}>
                                         <View style={{       flexDirection: 'column',
                                                              paddingTop: 5, 
-                                                             borderColor: '#51c64d', 
+                                                             borderColor: '#4d4d4f', 
                                                              borderBottomWidth: 4, 
-                                                             backgroundColor : '#66181f',}}>
+                                                             backgroundColor : '#5acea6',}}>
                                                       <Text style={styles.headerCols}>Makanan Tradisonal</Text>
                                         </View>
                                         <View>

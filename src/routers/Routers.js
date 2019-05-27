@@ -12,6 +12,7 @@ import  Makanan  from '@warung/Makanan';
 import  MakananDetail  from '@warung/MakananDetail';
 import  Dasbord  from '@dasbord/Dasbord';
 import  Minuman  from '@warung/Minuman';
+import  MinumanDetail  from '@warung/MinumanDetail';
 
 
 //const RouterWithRedux = connect()(Router)
@@ -27,6 +28,8 @@ export default class Routers extends Component<{}>{
 						<Scene key="Dasbord" component={Dasbord} title="Dasbord" hideNavBar />	
 						<Scene key="Minuman" component={Minuman} title="Minuman" hideNavBar />	
 						<Scene key="MakananDetail" component={MakananDetail} title="MakananDetail" hideNavBar />	
+						<Scene key="MinumanDetail" component={MinumanDetail} title="MinumanDetail" hideNavBar />	
+						
 					</Stack>
 				</Router>			
 			)

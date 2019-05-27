@@ -1,22 +1,24 @@
 {
   "expo": {
-  	"name"      : "ABANG",
-  	"icon"      : "./asset/logo.png",
-  	"slug"      : "ABANG",
-    "sdkVersion": "27.0.0",
-    "loading"   : {
-    			"backgroundColor" : "#99c8ff",
-    },
-    "notification": {
-      "icon": "./asset/logo.png",
-    },
-    "android"   : {
-      "package" : "com.project.abang",
-      "config"  : {
-                  "googleMaps" : {
-                    "apiKey" : "AIzaSyBpxloSBAX_j0eGfm-yR50UQoS0CqfwiRo"
-                  }
-      }
-    }
+                  	"name"      : "ABANG",
+                  	"icon"      : "./asset/logo.png",
+                  	"slug"      : "ABANG",
+                    "sdkVersion": "27.0.0",
+                    "splash": {
+                                "image": "./asset/Splass.png",
+                                "backgroundColor": "#FFFFFF",
+                                "resizeMode": "contain",
+                    },
+                    "notification": {
+                      "icon": "./asset/logo.png",
+                    },
+                    "android"   : {
+                      "package" : "com.project.abang",
+                      "config"  : {
+                                  "googleMaps" : {
+                                    "apiKey" : "AIzaSyBpxloSBAX_j0eGfm-yR50UQoS0CqfwiRo"
+                                  }
+                      }
+                    }
   }
 }
