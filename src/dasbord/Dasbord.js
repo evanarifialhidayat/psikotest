@@ -10,6 +10,9 @@ import ActionButton from 'react-native-action-button';
 import IconBadge from 'react-native-icon-badge';
 import { material , iOSUIKit , iOSColors , systemWeights } from 'react-native-typography';
 
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
 const items = [ 
   { thumbnail: {  uri : require('@images/panganan.png'   ) , mulai: 'Sega' ,buuton:'Makanan'} },
   { thumbnail: {  uri : require('@images/wedang.png'    ) , mulai: 'Wedang',buuton:'Minuman'} },
@@ -24,21 +27,11 @@ const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window'
 const sliderWidth = viewportWidth;
 const itemWidth = viewportWidth;
 
-export default class Dasbord extends Component { 
+class Dasbord extends Component { 
  constructor(props) {
     super(props);  
     this.state = {
-        slider1ActiveSlide: SLIDER_1_FIRST_ITEM,
-        data: [
-                {id:1, colsi: require('@images/c1.jpg'),namawarung : 'Warung Bu Mian',namaproduct: 'Nasi Goreng',  jarak:'9 KM', harga:'Rp 10.000',like:'10',comment:'40',logo:'500'},
-                {id:2, colsi: require('@images/c2.jpg'),namawarung : 'Warung Bu Takbir',namaproduct: 'Nasi Kebuli',  jarak:'19 KM', harga:'Rp 12.000',like:'2',comment:'20',logo:'52'},
-                {id:3, colsi: require('@images/c3.jpg'),namawarung : 'Warung Bu Budi',namaproduct: 'Empal Gentong',  jarak:'5 KM', harga:'Rp 15.000' ,like:'100',comment:'2',logo:'250'},
-                {id:4, colsi: require('@images/c4.jpg'),namawarung : 'Warung Bu Siti',namaproduct: 'Telor Ceplok' ,  jarak:'7 KM', harga:'Rp 14.000',like:'24',comment:'24',logo:'33'},
-                {id:5, colsi: require('@images/c5.jpg'),namawarung : 'Warung Bu Desi',namaproduct: 'Kentang Goreng' ,  jarak:'3 KM', harga:'Rp 117.000',like:'33',comment:'120',logo:'44'},
-                {id:6, colsi: require('@images/c6.jpg'),namawarung : 'Warung Kopi',namaproduct: 'Jajanan Malam' ,  jarak:'1 KM', harga:'Rp 153.000',like:'1',comment:'60',logo:'553'},
-                {id:7, colsi: require('@images/c7.jpg'),namawarung : 'Warung Pak Ndut',namaproduct: 'Nasi Betawi',  jarak:'10 KM', harga:'Rp 15.000' ,like:'9',comment:'80',logo:'77'},
-                {id:8, colsi: require('@images/c8.jpg'),namawarung : 'Warung Pak Mirsun',namaproduct: 'Kangkung',  jarak:'2 KM', harga:'Rp 1.000',like:'10',comment:'33',logo:'32'}
-              ],
+        slider1ActiveSlide: SLIDER_1_FIRST_ITEM,       
                modalVisible: false,
     };
 
@@ -48,10 +41,13 @@ export default class Dasbord extends Component {
 
  componentDidMount() {
     Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT); 
-   BackHandler.addEventListener('hardwareBackPress', () => this.backAndroid()) 
+   BackHandler.addEventListener('hardwareBackPress', () => this.backAndroid()) ;
+
   }
 
   componentWillUnmount () {
+   //  this.props.LIST_PRODUCT_PREORITAS_CEK(this.state.datatampung[1].id);  
+   // console.log('Hi dasbord from React Native mantap 14 = '+this.props.LIST_PRODUCT_PREORITAS_CEK_VALUE.dataall);  
     BackHandler.removeEventListener('hardwareBackPress', () => this.backAndroid()) 
   }
 
@@ -97,13 +93,13 @@ export default class Dasbord extends Component {
                                             }}>
                                       
                                             <View style={{flexDirection: 'row' }}>
-                                                <Text style={material.body2 ,{ flex: 2 ,}}>Warung Bu Mian</Text>                                    
+                                                <Text style={material.body2 ,{ flex: 2 ,}}>{item.namewarung}</Text>                                    
                                             </View>
                                             <View style={{flexDirection: 'row' }}>
-                                                <Text style={material.caption,{ flex: 2 }}>Nasi goreng</Text>   
+                                                <Text style={material.caption,{ flex: 2 }}>{item.namemakanan}</Text>   
                                             </View>   
                                              <View style={{flexDirection: 'row'}}>
-                                                <Text style={material.caption,{ flex: 2 }}>Jln. Jendral Sudirman No.34 Depan Sma</Text>    
+                                                <Text style={material.caption,{ flex: 2 }}>{item.alamat}</Text>    
                                             </View> 
                                             <View style={{flexDirection: 'row',justifyContent: 'flex-end',paddingRight: 15}}>
                                                   <View style={{ flex : 1,}} >
@@ -183,7 +179,7 @@ export default class Dasbord extends Component {
           <View style={styles.header}>                
                 <Carousel
                     ref={c => this._slider1Ref = c}
-                    data={this.state.data}
+                    data={this.props.LIST_DASBOARD_CEK_VALUE.dataall}
                     renderItem={this._renderItemHeader.bind(this)}
                     sliderWidth={sliderWidth}
                     itemWidth={itemWidth}
@@ -363,7 +359,15 @@ header:{
 });
 
 
+const mapStateToProps = state => {
+  return {
+    LIST_DASBOARD_CEK_VALUE: state.reducerDasboardType
+  };
+}
 
+
+
+export default  connect(mapStateToProps)(Dasbord);
 
 
 

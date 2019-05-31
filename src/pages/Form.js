@@ -2,9 +2,9 @@ import React, { Component }  from 'react';
 import { StyleSheet, Text, View ,Image ,TextInput,TouchableOpacity  ,Alert } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import AnimateLoadingButton from 'react-native-animate-loading-button';
-import { getDataLogin , cekData} from '@pages/TypesAction';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+// import { LIST_PRODUCT_PREORITAS_CEK , cekData} from '@pages/TypesAction';
+// import { connect } from 'react-redux';
+// import PropTypes from 'prop-types';
 
 import  Makanan  from '@warung/Makanan';
 
@@ -20,13 +20,14 @@ import { Permissions, Notifications } from 'expo';
 		    messagingSenderId: "536153226232"
 		  };
 
-class Form extends Component<{}> {
+export default  class Form extends Component<{}> {
    constructor(props){
     super(props)
     this.state = {
       username: '', 
-      password: ''
+      password: '',
     }
+   
   }
 
 componentWillMount(){
@@ -34,7 +35,8 @@ componentWillMount(){
 }
   componentDidMount(){   
   	 // this.props.getDataLogin();
-  	 //  this.props.cekData();    	 
+  	 //  this.props.cekData();      
+    //   console.log('Hi from React Native mantap 14 = '+this.props.LIST_PRODUCT_PREORITAS_CEK_VALUE);   
   }
  
  async  registerForPushNotificationsAsync() {
@@ -83,17 +85,20 @@ clearDataLogin(){
 	})
 }
  login(){  
- 	 this.props.getDataLogin(this.state.username,this.state.password);
+  // this.props.LIST_PRODUCT_PREORITAS_CEK("joss");  
+  //   console.log('Hi from React Native mantap = '+this.props.LIST_PRODUCT_PREORITAS_CEK_VALUE.dataall);
+ 	// this.props.getDataLogin(this.state.username,this.state.password);
  	 this.loadingButton.showLoading(true);
  	   setTimeout(() => {
-	 	   	 if(this.props.randomPeople.loginsukses === '["Sukses"]'){
-	 	   	 		 this.loadingButton.showLoading(false);
-	 	   	 		  this.clearDataLogin();
-		     	    //  Actions.Dasbord();
-	 	   	 }else{
-	 	   	 		 this.loadingButton.showLoading(false);
-	 	   	 		 this.clearDataLogin();
-	 	   	 }	       
+	 	   	 // if(this.props.randomPeople.loginsukses === '["Sukses"]'){
+	 	   	 // 		 this.loadingButton.showLoading(false);
+	 	   	 // 		  this.clearDataLogin();
+		     	//     //  Actions.Dasbord();
+	 	   	 // }else{
+	 	   	 // 		 this.loadingButton.showLoading(false);
+	 	   	 // 		 this.clearDataLogin();
+	 	   	 // }	  
+         this.loadingButton.showLoading(false);     
 	      }, 2000);
  	  	//console.log('Hi from React Native c'+this.props.randomPeople.tes);
  	  	 Actions.Dasbord();
@@ -154,11 +159,3 @@ const styles = StyleSheet.create({
     marginVertical: 10
   },
 });
-
-const mapStateToProps = state => {
-	return {
-		randomPeople: state.loginValidasi
-	};
-}
-
-export default  connect(mapStateToProps,{ getDataLogin , cekData })(Form);

@@ -18,21 +18,14 @@ const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window'
 const sliderWidth = viewportWidth;
 const itemWidth = viewportWidth;
 
-export default class MakananDetail extends Component { 
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
+class MakananDetail extends Component { 
  constructor(props) {
     super(props);  
     this.state = {
         slider1ActiveSlide: SLIDER_1_FIRST_ITEM,
-        data: [
-                {id:1, colsi: require('@images/c1.jpg'),namawarung : 'Warung Bu Mian',namaproduct: 'Nasi Goreng',  jarak:'9 KM', harga:'Rp 10.000',like:'10',comment:'40',logo:'500'},
-                {id:2, colsi: require('@images/c2.jpg'),namawarung : 'Warung Bu Takbir',namaproduct: 'Nasi Kebuli',  jarak:'19 KM', harga:'Rp 12.000',like:'2',comment:'20',logo:'52'},
-                {id:3, colsi: require('@images/c3.jpg'),namawarung : 'Warung Bu Budi',namaproduct: 'Empal Gentong',  jarak:'5 KM', harga:'Rp 15.000' ,like:'100',comment:'2',logo:'250'},
-                {id:4, colsi: require('@images/c4.jpg'),namawarung : 'Warung Bu Siti',namaproduct: 'Telor Ceplok' ,  jarak:'7 KM', harga:'Rp 14.000',like:'24',comment:'24',logo:'33'},
-                {id:5, colsi: require('@images/c5.jpg'),namawarung : 'Warung Bu Desi',namaproduct: 'Kentang Goreng' ,  jarak:'3 KM', harga:'Rp 117.000',like:'33',comment:'120',logo:'44'},
-                {id:6, colsi: require('@images/c6.jpg'),namawarung : 'Warung Kopi',namaproduct: 'Jajanan Malam' ,  jarak:'1 KM', harga:'Rp 153.000',like:'1',comment:'60',logo:'553'},
-                {id:7, colsi: require('@images/c7.jpg'),namawarung : 'Warung Pak Ndut',namaproduct: 'Nasi Betawi',  jarak:'10 KM', harga:'Rp 15.000' ,like:'9',comment:'80',logo:'77'},
-                {id:8, colsi: require('@images/c8.jpg'),namawarung : 'Warung Pak Mirsun',namaproduct: 'Kangkung',  jarak:'2 KM', harga:'Rp 1.000',like:'10',comment:'33',logo:'32'}
-              ],
               commentlist:[
                 {id:1, image: "https://bootdey.com/img/Content/avatar/avatar1.png", name:"Evan Arifial Hidayat",    comment:"Nasi Goreng Nya Mantap besok gua kesiti lagi.. ada diskon ga nih hehehe"},
                 {id:2, image: "https://bootdey.com/img/Content/avatar/avatar6.png", name:"John DoeLink",            comment:"Nice "},
@@ -45,7 +38,7 @@ export default class MakananDetail extends Component {
                modalVisible: false,
     };
 
-
+console.log("s=============="+this.props.idwarung);
 }
 
 
@@ -75,7 +68,7 @@ export default class MakananDetail extends Component {
    _renderItemHeader ({item, index}){
         return (
             <TouchableOpacity key={index} >
-                <ImageBackground  style = {styles.image} source = { item.colsi } >
+                <ImageBackground  style = {styles.image} source = { item.colsimage } >
                               <View style={{ flex: 1 , flexDirection: 'column' , paddingBottom: 25}}>
                               </View>
                               <View style={{
@@ -88,13 +81,13 @@ export default class MakananDetail extends Component {
                                             }}>
                                       
                                             <View style={{flexDirection: 'row' }}>
-                                                <Text style={material.body2 ,{ flex: 2 ,}}>Warung Bu Mian</Text>                                    
+                                                <Text style={material.body2 ,{ flex: 2 ,}}>{item.name}</Text>                                    
                                             </View>
                                             <View style={{flexDirection: 'row' }}>
-                                                <Text style={material.caption,{ flex: 2 }}>Nasi goreng</Text>   
+                                                <Text style={material.caption,{ flex: 2 }}>{item.namemakanan}</Text>   
                                             </View>   
                                              <View style={{flexDirection: 'row'}}>
-                                                <Text style={material.caption,{ flex: 2 }}>Jln. Jendral Sudirman No.34 Depan Sma</Text>    
+                                                <Text style={material.caption,{ flex: 2 }}>{item.alamat}</Text>    
                                             </View> 
                                             <View style={{flexDirection: 'row',justifyContent: 'flex-end',paddingRight: 15}}>
                                                   <View style={{ flex : 1,}} >
@@ -160,7 +153,7 @@ export default class MakananDetail extends Component {
           <View style={styles.header}>                
                 <Carousel
                     ref={c => this._slider1Ref = c}
-                    data={this.state.data}
+                    data={this.props.LIST_MAKANAN_CEK_VALUE.dataall}
                     renderItem={this._renderItemHeader.bind(this)}
                     sliderWidth={sliderWidth}
                     itemWidth={itemWidth}
@@ -193,7 +186,7 @@ export default class MakananDetail extends Component {
                                                borderTopWidth: 1,                                              
                                                borderRightColor: '#d3d2cb',  
                                                borderRightWidth: 1, }}> 
-                                               <Image style={styles.productImg} source={this.state.data[1].colsi}/>
+                                               <Image style={styles.productImg} source={this.props.LIST_MAKANAN_CEK_VALUE.dataall[this.props.idwarung-1].colsimage}/>
                                                <View style={{flexDirection: 'row',
                                                           justifyContent: 'center',
                                                           marginHorizontal:10,
@@ -201,15 +194,15 @@ export default class MakananDetail extends Component {
                                                           textAlign: 'center',}}>
                                                       <View style={{flexDirection: 'column'}}>
                                                           <ImageBackground style={{width: 20, height: 20,textAlign: 'center', }}  source={require('@images/like.png')} />                                                
-                                                          <Text  style={{ justifyContent: 'center' ,color: iOSColors.black, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>130</Text>
+                                                          <Text  style={{ justifyContent: 'center' ,color: iOSColors.black, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>{this.props.LIST_MAKANAN_CEK_VALUE.dataall[this.props.idwarung-1].like}</Text>
                                                       </View>
                                                       <View style={{flexDirection: 'column'}}>
                                                           <ImageBackground style={{width: 20, height: 20,textAlign: 'center', }}  source={require('@images/comment.png')} />                                                
-                                                          <Text  style={{ justifyContent: 'center' ,color: iOSColors.black, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>130</Text>
+                                                          <Text  style={{ justifyContent: 'center' ,color: iOSColors.black, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>{this.props.LIST_MAKANAN_CEK_VALUE.dataall[this.props.idwarung-1].comment}</Text>
                                                       </View>
                                                       <View style={{flexDirection: 'column'}}>
                                                           <ImageBackground style={{width: 20, height: 20,textAlign: 'center', }}  source={require('@images/logo.png')} />                                                
-                                                          <Text  style={{ justifyContent: 'center' ,color: iOSColors.black, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>130</Text>
+                                                          <Text  style={{ justifyContent: 'center' ,color: iOSColors.black, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>{this.props.LIST_MAKANAN_CEK_VALUE.dataall[this.props.idwarung-1].logo}</Text>
                                                       </View>                                                                                                 
                                               </View>
                                     </View>
@@ -230,12 +223,12 @@ export default class MakananDetail extends Component {
                                                                   bottom: 6,
                                                                   left: 0,
                                                                   right: 6,}}> 
-                                                                  <Text style={styles.headerColsDetailKM}>(10 KM)</Text>  
+                                                                  <Text style={styles.headerColsDetailKM}>{this.props.LIST_MAKANAN_CEK_VALUE.dataall[this.props.idwarung-1].jarak}</Text>  
                                                         </View>
-                                                      <Text style={styles.headerColsDetail}>Warung Bu Mian</Text>       
-                                                      <Text style={styles.headerColsDetail}>Nasi Goreng</Text>      
-                                                      <Text style={styles.headerColsDetail}>Jln. Jendral Sudirman No.34 Depan SMA</Text>                          
-                                                      <Text style={styles.price}>Rp. 10.000</Text>
+                                                      <Text style={styles.headerColsDetail}>{this.props.LIST_MAKANAN_CEK_VALUE.dataall[this.props.idwarung-1].name}</Text>       
+                                                      <Text style={styles.headerColsDetail}>{this.props.LIST_MAKANAN_CEK_VALUE.dataall[this.props.idwarung-1].namemakanan}</Text>      
+                                                      <Text style={styles.headerColsDetail}>{this.props.LIST_MAKANAN_CEK_VALUE.dataall[this.props.idwarung-1].alamat}</Text>                          
+                                                      <Text style={styles.price}>{this.props.LIST_MAKANAN_CEK_VALUE.dataall[this.props.idwarung-1].harga}</Text>
                                                               
                                                   
                                         </View>
@@ -615,7 +608,13 @@ header:{
 });
 
 
+const mapStateToProps = state => {
+  return {
+    LIST_MAKANAN_CEK_VALUE: state.reducerMakananType
+  };
+}
 
+export default  connect(mapStateToProps)(MakananDetail);
 
 
 

@@ -8,7 +8,9 @@ export default class Logo extends Component<{}>{
     super()
     }
   goBack(){
-    Actions.pop();
+  // Actions.refresh({param1: 'hello', param2: 'world'})
+   // Actions.pop();
+   //Actions.refresh();
   }
   render() {
     return (

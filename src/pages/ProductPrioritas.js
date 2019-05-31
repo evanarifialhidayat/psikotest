@@ -18,35 +18,20 @@ import Carousel from 'react-native-snap-carousel';
 import { material , iOSUIKit , iOSColors , systemWeights } from 'react-native-typography';
 import { Actions } from 'react-native-router-flux';
 import Placeholder, { Line , Media } from "rn-placeholder";
-export default class ProductPrioritas extends Component {
+
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
+class ProductPrioritas extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [
-        {id:1, harga:"Rp. 10.000",  name: "Warung Bu Jarwo",       jarak:"1 KM", colsimage:require('@images/c1.jpg' ) ,type: "Makanan"},
-        {id:2, harga:"Rp. 20.000",  name: "Warung Bu Ida",         jarak:"2 KM", colsimage:require('@images/m1.jpg' ),type: "Minuman"},
-        {id:3, harga:"Rp. 5.000",  name: "Warung Bu Gureng ",      jarak:"3 KM", colsimage:require('@images/c2.jpg' ),type: "Makanan"},
-        {id:4, harga:"Rp. 11.000",  name: "Warung Bu Slamet",      jarak:"4 KM", colsimage:require('@images/m2.jpg' ),type: "Minuman"},
-        {id:5, harga:"Rp. 14.000",  name: "Mba Wah",               jarak:"5 KM", colsimage:require('@images/c3.jpg' ),type: "Makanan"},
-        {id:6, harga:"Rp. 13.000",  name: "Warung Bu Erlin",       jarak:"6 KM", colsimage:require('@images/m3.jpg' ),type: "Minuman"},
-        {id:7, harga:"Rp. 15.000",  name: "Warung Bu Yunus",       jarak:"7 KM", colsimage:require('@images/c4.jpg' ),type: "Makanan"},
-        {id:8, harga:"Rp. 9.000",  name: "Ridiculus mus",          jarak:"8 KM", colsimage:require('@images/m4.jpg' ),type: "Minuman"},
-        {id:9, harga:"Rp. 10.000", name: "Warung Bu Jarwo",       jarak:"1 KM", colsimage:require('@images/c5.jpg' ),type: "Makanan"},
-        {id:10, harga:"Rp. 20.000", name: "Warung Bu Ida",         jarak:"2 KM", colsimage:require('@images/m5.jpg' ),type: "Minuman"},
-        {id:11, harga:"Rp. 5.000",  name: "Warung Bu Gureng ",      jarak:"3 KM", colsimage:require('@images/c6.jpg' ),type: "Makanan"},
-        {id:12, harga:"Rp. 11.000", name: "Warung Bu Slamet",      jarak:"4 KM", colsimage:require('@images/m6.jpg' ),type: "Minuman"},
-        {id:13, harga:"Rp. 14.000",  name: "Mba Wah",               jarak:"5 KM", colsimage:require('@images/c7.jpg' ),type: "Makanan"},
-        {id:14, harga:"Rp. 13.000",  name: "Warung Bu Erlin",       jarak:"6 KM", colsimage:require('@images/m7.jpg' ),type: "Minuman"},
-        {id:15, harga:"Rp. 15.000",  name: "Warung Bu Yunus",       jarak:"7 KM", colsimage:require('@images/c8.jpg' ),type: "Makanan"},
-        {id:17, harga:"Rp. 9.000",  name: "Ridiculus mus",          jarak:"8 KM", colsimage:require('@images/m8.jpg' ),type: "Minuman"},
-        {id:18, harga:"Rp. 15.000",  name: "Warung Bu Yunus",       jarak:"7 KM", colsimage:require('@images/c9.jpg' ),type: "Makanan"},
-        {id:19, harga:"Rp. 9.000",  name: "Ridiculus mus",          jarak:"8 KM", colsimage:require('@images/m9.jpg' ),type: "Minuman"},
-        {id:"0999", harga:"Rp. 19.000",  name: "Felis",      jarak:"9 KM", colsimage:require('@images/redmore.png' ),type: "REDMORE"},
-      ],
       makanan: '',
       isReady: false, 
       setReady: false
     };
+
+   //  console.log('Hi roter f routers Prioritas = '+this.props.LIST_PRODUCT_PREORITAS_CEK_VALUE.dataall);
     if(this.state.isReady == false){
         setInterval(
           () => this.setState({ isReady: true}),
@@ -60,7 +45,9 @@ export default class ProductPrioritas extends Component {
   }
   
   onPresMakanan(type,id){
-   //  Alert.alert('ss'+id);
+    // Alert.alert(type+'ss'+id);
+    // return false;
+    id = "2";
    if(type === "REDMORE"){
      Actions.Dasbord(); 
    }else if(type === "Makanan"){
@@ -81,7 +68,7 @@ _renderItem ({item, index}) {
                                                             >     
                                                                  <ImageBackground  style={{borderRadius:10,flex: 1,alignSelf: 'stretch'}} source={item.colsimage} />                     
                                                                             <View style={{flexDirection: 'row'}}>
-                                                                                <Text style={material.body2 ,{ flex: 2 }}>Warung Bu Mian</Text>                                    
+                                                                                <Text style={material.body2 ,{ flex: 2 }}>{item.name}</Text>                                    
                                                                              </View>
                                                                              <View >
                                                                                 <Text style={material.caption}>Nasi goreng</Text>   
@@ -171,7 +158,7 @@ _renderItem ({item, index}) {
     return (
          <Carousel 
               ref={(c1) => { this._carousel = c1; }}
-              data={this.state.data}
+              data={this.props.LIST_PRODUCT_PREORITAS_CEK_VALUE.dataall}
               renderItem={this._renderItem.bind(this)}
               layout={'default'}
               firstItem={0}
@@ -375,3 +362,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
 });  
+
+
+
+const mapStateToProps = state => {
+  return {
+    LIST_PRODUCT_PREORITAS_CEK_VALUE: state.reducerProdType
+  };
+}
+
+
+
+export default  connect(mapStateToProps)(ProductPrioritas);

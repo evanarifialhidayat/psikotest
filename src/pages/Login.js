@@ -6,9 +6,12 @@ import  Form from '@pages/Form';
 import Logo from '@pages/Logo';
 import ProductPrioritas from '@pages/ProductPrioritas';
 
-
 export default class Login extends Component<{}> {
- componentDidMount() {
+  constructor(props){
+    super(props);
+  }
+ 
+ componentDidMount() {  
    Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT);    
   }
   signup(){
@@ -74,3 +77,4 @@ const styles = StyleSheet.create({
       fontWeight: 'bold'
   }
 });
+

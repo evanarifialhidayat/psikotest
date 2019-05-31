@@ -18,23 +18,17 @@ import { material , iOSUIKit , iOSColors , systemWeights } from 'react-native-ty
 import { Actions } from 'react-native-router-flux';
 import ActionButton from 'react-native-action-button';
 import IconBadge from 'react-native-icon-badge';
-export default class Minuman extends Component {
+
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
+class Minuman extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [
-        {id:1, harga:"Rp. 10.000", name: "Warung Bu Jarwo",     jarak:"1 KM", colsimage:require('@images/m1.jpg' )},
-        {id:2, harga:"Rp. 20.000", name: "Warung Bu Ida",       jarak:"2 KM", colsimage:require('@images/m2.jpg' )},
-        {id:3, harga:"Rp. 5.000",  name: "Warung Bu Gureng ",   jarak:"3 KM", colsimage:require('@images/m3.jpg' )},
-        {id:4, harga:"Rp. 11.000", name: "Warung Bu Slamet",    jarak:"4 KM", colsimage:require('@images/m4.jpg' )},
-        {id:5, harga:"Rp. 14.000", name: "Mba Wah",             jarak:"5 KM", colsimage:require('@images/m5.jpg' )},
-        {id:6, harga:"Rp. 13.000", name: "Warung Bu Erlin",     jarak:"6 KM", colsimage:require('@images/m6.jpg' )},
-        {id:7, harga:"Rp. 15.000", name: "Warung Bu Yunus",     jarak:"7 KM", colsimage:require('@images/m7.jpg' )},
-        {id:8, harga:"Rp. 9.000",  name: "Ridiculus mus",       jarak:"8 KM", colsimage:require('@images/m8.jpg' )},
-        {id:9, harga:"Rp. 19.000", name: "Felis",               jarak:"9 KM", colsimage:require('@images/m9.jpg' )},
-      ],
       makanan: '',
     };
+    //console.log('Hi roter f routers Minuman = '+this.props.LIST_MINUMAN_CEK_VALUE.dataall);
   }
   
   onPresMakanan(id){
@@ -50,11 +44,11 @@ _renderItem ({item, index}) {
               >                     
                    <ImageBackground  style={{borderRadius:10,flex: 1,alignSelf: 'stretch'}} source={item.colsimage} />                     
                    <View style={{flexDirection: 'row'}}>
-                      <Text style={material.body2 ,{ flex: 2 }}>Warung Bu Mian</Text>                                    
+                      <Text style={material.body2 ,{ flex: 2 }}>{item.name}</Text>                                    
                    </View>
                    <View >
-                      <Text style={material.caption}>Nasi goreng</Text>   
-                      <Text style={material.caption}>Jln. Jendral Sudirman No.34 Depan Sma</Text>    
+                      <Text style={material.caption}>{item.nameminuman}</Text>   
+                      <Text style={material.caption}>{item.alamat}</Text>    
                    </View>    
 
                    <View style={{flexDirection: 'row',justifyContent: 'flex-end',paddingRight: 15}}>
@@ -65,13 +59,13 @@ _renderItem ({item, index}) {
                         </View>
                       
                                 <ImageBackground style={{width: 20, height: 20,textAlign: 'right', }}  source={require('@images/like.png')}>
-                                    <Text  style={{color: iOSColors.white, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>130</Text>
+                                    <Text  style={{color: iOSColors.white, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>{item.like}</Text>
                                 </ImageBackground>  
                                 <ImageBackground style={{ width: 20, height: 20, textAlign: 'right', }}  source={require('@images/comment.png')}>
-                                  <Text  style={{ color: iOSColors.white, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>100</Text>
+                                  <Text  style={{ color: iOSColors.white, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>{item.comment}</Text>
                                 </ImageBackground>  
                                  <ImageBackground style={{ width: 20, height: 20, textAlign: 'right', }}  source={require('@images/logo.png')}>
-                                  <Text  style={{ color: iOSColors.white, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>100</Text>
+                                  <Text  style={{ color: iOSColors.white, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>{item.logo}</Text>
                                 </ImageBackground> 
                                 <View>
                                   <Text style={{ flex: 1 , paddingTop:2,fontSize: 10, color: iOSColors.lightgray,  textAlign: 'right',}}>
@@ -141,7 +135,7 @@ _renderItem ({item, index}) {
             </View>
             <Carousel 
               ref={(c1) => { this._carousel = c1; }}
-              data={this.state.data}
+              data={this.props.LIST_MINUMAN_CEK_VALUE.dataall}
               renderItem={this._renderItem.bind(this)}
               layout={'default'}
               firstItem={0}
@@ -172,7 +166,7 @@ _renderItem ({item, index}) {
             </View> 
           <Carousel 
               ref={(c2) => { this._carousel = c2; }}
-              data={this.state.data}
+              data={this.props.LIST_MINUMAN_CEK_VALUE.dataall}
               renderItem={this._renderItem.bind(this)}
               layout={'default'}
               firstItem={0}
@@ -203,7 +197,7 @@ _renderItem ({item, index}) {
             </View> 
           <Carousel 
               ref={(c3) => { this._carousel = c3; }}
-              data={this.state.data}
+              data={this.props.LIST_MINUMAN_CEK_VALUE.dataall}
               renderItem={this._renderItem.bind(this)}
               layout={'default'}
               firstItem={0}
@@ -425,3 +419,14 @@ const styles = StyleSheet.create({
       color: 'white',
     },
 });  
+
+
+const mapStateToProps = state => {
+  return {
+    LIST_MINUMAN_CEK_VALUE: state.reducerMinumanType
+  };
+}
+
+
+
+export default  connect(mapStateToProps)(Minuman);
