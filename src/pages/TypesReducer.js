@@ -3,10 +3,8 @@ import {
 	FETCHING_PEOPLE_REQUEST_suces,
 	FETCHING_PEOPLE_REQUEST_eror,
 	TT,
-	LIST_PRODUCT_PREORITAS,
-	LIST_MAKANAN,
-	LIST_MINUMAN,
-	LIST_DASBOARD
+	LIST_DASBOARD,
+	LIST_DASBOARD_MENU
 } from '@pages/Types';
 
 import { combineReducers } from "redux";
@@ -43,6 +41,20 @@ const tesx = (state = initialStateNew , action) => {
 	}
 };
 
+//List DASBOARD MENU
+const initialStateDasbordMenu = { 
+	isDataall: false,
+	dataall :[],
+};
+const reducerDasboardMenu = (state = initialStateDasbordMenu, action) => {
+	switch(action.type){
+		case LIST_DASBOARD_MENU: 
+			return {...state,isDataall: false, dataall: action.items};
+		default:
+			return state;
+	}
+}
+
 
 //List DASBOARD
 const initialStateDasbord = { 
@@ -58,56 +70,14 @@ const reducerDasboard = (state = initialStateDasbord, action) => {
 	}
 }
 
-//List MINUMAN
-const initialStateMinuman = { 
-	isDataall: false,
-	dataall :[],
-};
-const reducerMinuman = (state = initialStateMinuman, action) => {
-	switch(action.type){
-		case LIST_MINUMAN: 
-			return {...state,isDataall: false, dataall: action.playlod};
-		default:
-			return state;
-	}
-}
 
-//List MAKANAN
-const initialStateMakanan = { 
-	isDataall: false,
-	dataall :[],
-};
-const reducerMakanan = (state = initialStateMakanan, action) => {
-	switch(action.type){
-		case LIST_MAKANAN: 
-			return {...state,isDataall: false, dataall: action.playlod};
-		default:
-			return state;
-	}
-}
-
-//Product Prioritas
-const initialStateProd = { 
-	isDataall: false,
-	dataall :[],
-};
-const reducerProd = (state = initialStateProd, action) => {
-	switch(action.type){
-		case LIST_PRODUCT_PREORITAS: 
-			return {...state,isDataall: false, dataall: action.playlod};
-		default:
-			return state;
-	}
-}
 
 
 const globalReducerSatu = combineReducers({  
 //  loginValidasi: loginValidasi,
 //  x: tesx,
-  reducerProdType : reducerProd,
-  reducerMakananType  : reducerMakanan,
-  reducerMinumanType : reducerMinuman,
   reducerDasboardType: reducerDasboard,
+  reducerDasboardMenuType: reducerDasboardMenu,
 });
 
 export default globalReducerSatu;

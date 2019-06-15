@@ -4,7 +4,7 @@ import { Actions } from 'react-native-router-flux';
 import Expo, {  AdMobBanner , Constants ,AdMobInterstitial,  PublisherBanner,  AdMobRewarded } from 'expo';
 import  Form from '@pages/Form';
 import Logo from '@pages/Logo';
-import ProductPrioritas from '@pages/ProductPrioritas';
+
 
 export default class Login extends Component<{}> {
   constructor(props){
@@ -21,8 +21,7 @@ export default class Login extends Component<{}> {
     return (
    <ImageBackground   style={styles.container} >
        <Logo />
-       <Form />
-       <ProductPrioritas />
+       <Form />       
        <View style={styles.signupInput}>
             <Text style={styles.signup}>
               Dont Have an account yet?

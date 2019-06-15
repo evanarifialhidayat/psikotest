@@ -15,8 +15,9 @@
   			"@images": "./src/images",
   			"@signup": "./src/signup",
   			"@warung": "./src/warung",
-            "@dasbord": "./src/dasbord",
-            "@api": "./src/api",     			
+        "@dasbord": "./src/dasbord",
+        "@api": "./src/api",     	        	
+        "@kantor": "./src/kantor", 	
   		 }
   	   }
   	 ]

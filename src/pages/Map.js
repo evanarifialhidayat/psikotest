@@ -176,7 +176,6 @@ const LATITUDE_DELTA = 0.012 * ( width / height );
 const LONGITUDE_DELTA = 0.012 * ( width / height );
 const RADIUS = 300;
 
-import  Makanan  from '@warung/Makanan';
 export default class Map extends Component<{}> {
 constructor(props) {
    super(props);

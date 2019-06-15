@@ -1,8 +1,8 @@
 {
   "expo": {
-                  	"name"      : "ABANG",
+                  	"name"      : "SKIOTES",
                   	"icon"      : "./asset/logo.png",
-                  	"slug"      : "ABANG",
+                  	"slug"      : "SKIOTES",
                     "sdkVersion": "27.0.0",
                     "splash": {
                                 "image": "./asset/Splass.png",
@@ -13,7 +13,7 @@
                       "icon": "./asset/logo.png",
                     },
                     "android"   : {
-                      "package" : "com.project.abang",
+                      "package" : "com.project.skiotes",
                       "config"  : {
                                   "googleMaps" : {
                                     "apiKey" : "AIzaSyBpxloSBAX_j0eGfm-yR50UQoS0CqfwiRo"

@@ -6,27 +6,18 @@ import { StyleSheet, View ,Text} from 'react-native';
 import  Login  from '@pages/Login';
 import  Map  from '@pages/Map';
 import  Signup  from '@signup/Signup';
-import  Makanan  from '@warung/Makanan';
-import  MakananDetail  from '@warung/MakananDetail';
-import  Dasbord  from '@dasbord/Dasbord';
-import  Minuman  from '@warung/Minuman';
-import  MinumanDetail  from '@warung/MinumanDetail';
 
-import { LIST_PRODUCT_PREORITAS_CEK , LIST_MAKANAN_CEK , LIST_MINUMAN_CEK,LIST_DASBOARD_CEK} from '@pages/TypesAction';
+import  Dasbord  from '@dasbord/Dasbord';
+
+import { LIST_DASBOARD_CEK , LIST_DASBOARD_MENU_CEK } from '@pages/TypesAction';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-//const RouterWithRedux = connect()(Router)
-class Routers extends Component<{}>{
+class Routers extends Component<{}>{ 
 constructor(props){
     super(props)
-    // setTimeout(() => {
- 	   this.props.LIST_PRODUCT_PREORITAS_CEK();  
- 	   this.props.LIST_MAKANAN_CEK();
- 	   this.props.LIST_MINUMAN_CEK();
  	   this.props.LIST_DASBOARD_CEK();
- 	   //console.log('Hi roter f routers routers = '+this.props.LIST_PRODUCT_PREORITAS_CEK_VALUE.dataall);
-  //	 },2000);   
+ 	   this.props.LIST_DASBOARD_MENU_CEK();
 }
   componentWillMount(){
 	
@@ -41,12 +32,7 @@ constructor(props){
 						<Scene key="Login" component={Login} title="Login" initial={true} hideNavBar />	
 						<Scene key="Map" component={Map} title="Map" hideNavBar />	
 						<Scene key="Signup" component={Signup} title="Signup" hideNavBar />	
-						<Scene key="Makanan" component={Makanan} title="Makanan" hideNavBar />	
-						<Scene key="Dasbord" component={Dasbord} title="Dasbord" hideNavBar />	
-						<Scene key="Minuman" component={Minuman} title="Minuman" hideNavBar />	
-						<Scene key="MakananDetail" component={MakananDetail} title="MakananDetail" hideNavBar />	
-						<Scene key="MinumanDetail" component={MinumanDetail} title="MinumanDetail" hideNavBar />	
-						
+						<Scene key="Dasbord" component={Dasbord} title="Dasbord" hideNavBar />							
 					</Stack>
 				</Router>			
 			)
@@ -55,10 +41,8 @@ constructor(props){
 
 const mapStateToProps = state => {
   return {
-    LIST_PRODUCT_PREORITAS_CEK_VALUE: state.reducerProdType,
-    LIST_MAKANAN_CEK_VALUE: state.reducerMakananType,
-    LIST_MINUMAN_CEK_VALUE: state.reducerMinumanType,
     LIST_DASBOARD_CEK_VALUE: state.reducerDasboardType,
+    LIST_DASBOARD_MENU_CEK_VALUE: state.reducerDasboardMenuType,
   };
 }
 
@@ -66,9 +50,8 @@ const mapStateToProps = state => {
 
 export default  connect(
 						mapStateToProps,
-									{   LIST_PRODUCT_PREORITAS_CEK , 
-										LIST_MAKANAN_CEK , 
-										LIST_MINUMAN_CEK,
-										LIST_DASBOARD_CEK
+									{   
+										LIST_DASBOARD_CEK,
+										LIST_DASBOARD_MENU_CEK
 									}
 				)(Routers);

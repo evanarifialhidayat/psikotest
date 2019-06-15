@@ -13,14 +13,6 @@ import { material , iOSUIKit , iOSColors , systemWeights } from 'react-native-ty
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-const items = [ 
-  { thumbnail: {  uri : require('@images/panganan.png'   ) , mulai: 'Sega' ,buuton:'Makanan'} },
-  { thumbnail: {  uri : require('@images/wedang.png'    ) , mulai: 'Wedang',buuton:'Minuman'} },
-  { thumbnail: {  uri : require('@images/warung.png'      ) , mulai: 'Warung',buuton:'Toko'} },
-   { thumbnail: {  uri : require('@images/travel.png' ) , mulai: 'Travel' ,buuton:'Travel'}},
-  { thumbnail: {  uri : require('@images/kedo.png' ) , mulai: 'Kado' ,buuton:'Pesanan'}}
- ];
-
 const SLIDER_1_FIRST_ITEM = 0;
 const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
 
@@ -93,18 +85,18 @@ class Dasbord extends Component {
                                             }}>
                                       
                                             <View style={{flexDirection: 'row' }}>
-                                                <Text style={material.body2 ,{ flex: 2 ,}}>{item.namewarung}</Text>                                    
+                                                <Text style={material.body2 ,{ flex: 2 ,}}>{item.type}</Text>                                    
                                             </View>
                                             <View style={{flexDirection: 'row' }}>
-                                                <Text style={material.caption,{ flex: 2 }}>{item.namemakanan}</Text>   
+                                                <Text style={material.caption,{ flex: 2 }}>{item.kegunaan}</Text>   
                                             </View>   
                                              <View style={{flexDirection: 'row'}}>
-                                                <Text style={material.caption,{ flex: 2 }}>{item.alamat}</Text>    
+                                                <Text style={material.caption,{ flex: 2 }}>{item.penggunaan}</Text>    
                                             </View> 
                                             <View style={{flexDirection: 'row',justifyContent: 'flex-end',paddingRight: 15}}>
                                                   <View style={{ flex : 1,}} >
                                                         <Text style={{ flex: 1 , paddingTop:2,fontSize: 10, color: iOSColors.red,  textAlign: 'left',}}>
-                                                         {item.harga}
+                                                         {item.manfaat}
                                                         </Text>   
                                                   </View>                                  
                                                           <ImageBackground style={{width: 20, height: 20,textAlign: 'right', }}  source={require('@images/like.png')}>
@@ -115,12 +107,7 @@ class Dasbord extends Component {
                                                           </ImageBackground>  
                                                            <ImageBackground style={{ width: 20, height: 20, textAlign: 'right', }}  source={require('@images/logo.png')}>
                                                             <Text  style={{ color: iOSColors.white, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>{item.logo}</Text>
-                                                          </ImageBackground> 
-                                                          <View>
-                                                            <Text style={{ flex: 1 , paddingTop:2,fontSize: 10, color: iOSColors.lightgray,  textAlign: 'right',}}>
-                                                               ({item.jarak})
-                                                            </Text> 
-                                                          </View> 
+                                                          </ImageBackground>                                                           
                                             </View>
                                  </View>
                                          
@@ -131,14 +118,35 @@ class Dasbord extends Component {
 
  
  async _eventLavel(item){
-      if(item === 'Dasbord'){
+      if(item === 'TK'){
          Actions.Login(); 
       }
-      if(item === 'Sega'){
-         Actions.Makanan(); 
+      if(item === 'SD'){
+        Actions.Login(); 
       }
-      if(item === 'Wedang'){
-         Actions.Minuman(); 
+      if(item === 'SMP'){
+        Actions.Login(); 
+      }
+      if(item === 'SMA'){
+        Actions.Login(); 
+      }
+      if(item === 'S1'){
+        Actions.Login(); 
+      }
+      if(item === 'CPNS'){
+        Actions.Login(); 
+      }
+      if(item === 'Perusahaan'){
+        Actions.Login(); 
+      }
+      if(item === 'All Module'){
+        Actions.Login(); 
+      }
+      if(item === 'Versi Premium'){
+        Actions.Login(); 
+      }
+      if(item === 'Setting'){
+        Actions.Login(); 
       }
   }
  
@@ -205,7 +213,7 @@ class Dasbord extends Component {
               <Grid
                 style={styles.list}
                 renderItem={this._renderItem}               
-                data={items}
+                data={this.props.LIST_DASBOARD_MENU_CEK_VALUE.dataall}
                 itemsPerRow={4}
               />
 
@@ -361,7 +369,8 @@ header:{
 
 const mapStateToProps = state => {
   return {
-    LIST_DASBOARD_CEK_VALUE: state.reducerDasboardType
+    LIST_DASBOARD_CEK_VALUE: state.reducerDasboardType,
+    LIST_DASBOARD_MENU_CEK_VALUE: state.reducerDasboardMenuType,
   };
 }
 
