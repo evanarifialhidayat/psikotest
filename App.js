@@ -29,3 +29,5 @@ export default class App extends React.Component {
 
 //https://facebook.github.io/react-native/docs/layout-props#flexbasis  layout
 
+//keytool -genkey -v -keystore my-release-key.keystore -alias alias_name -keyalg RSA -keysize 2048 -validity 10000
+

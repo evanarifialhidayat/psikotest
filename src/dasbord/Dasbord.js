@@ -13,6 +13,8 @@ import { material , iOSUIKit , iOSColors , systemWeights } from 'react-native-ty
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import Placeholder, { Line , Media } from "rn-placeholder";
+
 const SLIDER_1_FIRST_ITEM = 0;
 const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
 
@@ -25,9 +27,9 @@ class Dasbord extends Component {
     this.state = {
         slider1ActiveSlide: SLIDER_1_FIRST_ITEM,       
                modalVisible: false,
-    };
-
-
+                isReady: false, 
+                isReadyHeader: false,
+    };   
 }
 
 
@@ -53,66 +55,98 @@ class Dasbord extends Component {
 
   _renderItem = (data, i) =>  
     { 
+       const ComponentLoaded = () => 
+                            <TouchableOpacity style={styles.item} key={i} 
+                                      onPress={this._eventLavel.bind(this, data.thumbnail.mulai)}>
+                                      <View style={{        flex: 1 , 
+                                                            flexDirection: 'column' , 
+                                                            justifyContent: 'center',
+                                                            alignItems: 'flex-start',}}>
+                                            <Image source = { data.thumbnail.uri } style = { styles.menuImage }/>
+                                      </View>
+                                      <View>
+                                            <Text style={styles.footButton} >{ data.thumbnail.buuton }</Text>
+                                      </View>
+                            </TouchableOpacity>
+        ;
          return(  
-           <TouchableOpacity style={styles.item} key={i} 
-                      onPress={this._eventLavel.bind(this, data.thumbnail.mulai)}>
-                      <View style={{        flex: 1 , 
-                                            flexDirection: 'column' , 
-                                            justifyContent: 'center',
-                                            alignItems: 'flex-start',}}>
-                            <Image source = { data.thumbnail.uri } style = { styles.menuImage }/>
-                      </View>
-                      <View>
-                            <Text style={styles.footButton} >{ data.thumbnail.buuton }</Text>
-                      </View>
-            </TouchableOpacity>
+                                  <Placeholder
+                                    isReady={() => this.setState({ isReady: true})}
+                                    size={60}
+                                    animate="fade"
+                                    lineNumber={4}
+                                    lineSpacing={5}
+                                    lastLineWidth="30%"    
+                                    whenReadyRender={() => 
+                                              <ComponentLoaded />
+                                      }                                
+                                  >
+                                        <Media />
+                                        <Line style={{backgroundColor:'rgba(25,25,25,0.1)'}}/>
+                                  </Placeholder>
           );
    }
 
    _renderItemHeader ({item, index}){
+          const ComponentLoadedHeader = () => 
+                                   <TouchableOpacity key={index} >
+                                            <ImageBackground  style = {styles.image} source = { item.colsi } >
+                                                          <View style={{ flex: 1 , flexDirection: 'column' , paddingBottom: 25}}>
+                                                          </View>
+                                                          <View style={{
+                                                                        flex: 1 , 
+                                                                        flexDirection: 'column' , 
+                                                                        justifyContent: 'flex-end',
+                                                                        alignItems: 'flex-start',
+                                                                        backgroundColor: 'rgba(52, 52, 52, 0.8)',
+                                                                        paddingHorizontal: 3,
+                                                                        }}>
+                                                                  
+                                                                        <View style={{flexDirection: 'row' }}>
+                                                                            <Text style={material.body2 ,{ flex: 2 ,}}>{item.type}</Text>                                    
+                                                                        </View>
+                                                                        <View style={{flexDirection: 'row' }}>
+                                                                            <Text style={material.caption,{ flex: 2 }}>{item.kegunaan}</Text>   
+                                                                        </View>   
+                                                                         <View style={{flexDirection: 'row'}}>
+                                                                            <Text style={material.caption,{ flex: 2 }}>{item.penggunaan}</Text>    
+                                                                        </View> 
+                                                                        <View style={{flexDirection: 'row',justifyContent: 'flex-end',paddingRight: 15}}>
+                                                                              <View style={{ flex : 1,}} >
+                                                                                    <Text style={{ flex: 1 , paddingTop:2,fontSize: 10, color: iOSColors.red,  textAlign: 'left',}}>
+                                                                                     {item.manfaat}
+                                                                                    </Text>   
+                                                                              </View>                                  
+                                                                                      <ImageBackground style={{width: 20, height: 20,textAlign: 'right', }}  source={require('@images/like.png')}>
+                                                                                          <Text  style={{color: iOSColors.white, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>{item.like}</Text>
+                                                                                      </ImageBackground>  
+                                                                                      <ImageBackground style={{ width: 20, height: 20, textAlign: 'right', }}  source={require('@images/comment.png')}>
+                                                                                        <Text  style={{ color: iOSColors.white, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>{item.comment}</Text>
+                                                                                      </ImageBackground>  
+                                                                                       <ImageBackground style={{ width: 20, height: 20, textAlign: 'right', }}  source={require('@images/logo.png')}>
+                                                                                        <Text  style={{ color: iOSColors.white, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>{item.logo}</Text>
+                                                                                      </ImageBackground>                                                           
+                                                                        </View>
+                                                             </View>
+                                                                     
+                                            </ImageBackground>                
+                                        </TouchableOpacity>
+              ;
         return (
-            <TouchableOpacity key={index} >
-                <ImageBackground  style = {styles.image} source = { item.colsi } >
-                              <View style={{ flex: 1 , flexDirection: 'column' , paddingBottom: 25}}>
-                              </View>
-                              <View style={{
-                                            flex: 1 , 
-                                            flexDirection: 'column' , 
-                                            justifyContent: 'flex-end',
-                                            alignItems: 'flex-start',
-                                            backgroundColor: 'rgba(52, 52, 52, 0.8)',
-                                            paddingHorizontal: 3,
-                                            }}>
-                                      
-                                            <View style={{flexDirection: 'row' }}>
-                                                <Text style={material.body2 ,{ flex: 2 ,}}>{item.type}</Text>                                    
-                                            </View>
-                                            <View style={{flexDirection: 'row' }}>
-                                                <Text style={material.caption,{ flex: 2 }}>{item.kegunaan}</Text>   
-                                            </View>   
-                                             <View style={{flexDirection: 'row'}}>
-                                                <Text style={material.caption,{ flex: 2 }}>{item.penggunaan}</Text>    
-                                            </View> 
-                                            <View style={{flexDirection: 'row',justifyContent: 'flex-end',paddingRight: 15}}>
-                                                  <View style={{ flex : 1,}} >
-                                                        <Text style={{ flex: 1 , paddingTop:2,fontSize: 10, color: iOSColors.red,  textAlign: 'left',}}>
-                                                         {item.manfaat}
-                                                        </Text>   
-                                                  </View>                                  
-                                                          <ImageBackground style={{width: 20, height: 20,textAlign: 'right', }}  source={require('@images/like.png')}>
-                                                              <Text  style={{color: iOSColors.white, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>{item.like}</Text>
-                                                          </ImageBackground>  
-                                                          <ImageBackground style={{ width: 20, height: 20, textAlign: 'right', }}  source={require('@images/comment.png')}>
-                                                            <Text  style={{ color: iOSColors.white, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>{item.comment}</Text>
-                                                          </ImageBackground>  
-                                                           <ImageBackground style={{ width: 20, height: 20, textAlign: 'right', }}  source={require('@images/logo.png')}>
-                                                            <Text  style={{ color: iOSColors.white, fontSize: 7, fontWeight: 'bold', paddingTop:3,textAlign: 'center'}}>{item.logo}</Text>
-                                                          </ImageBackground>                                                           
-                                            </View>
-                                 </View>
-                                         
-                </ImageBackground>                
-            </TouchableOpacity>
+                     <Placeholder
+                                    isReady={() => this.setState({ isReadyHeader: true})}
+                                    size={60}
+                                    animate="fade"
+                                    lineNumber={4}
+                                    lineSpacing={5}
+                                    lastLineWidth="30%"    
+                                    whenReadyRender={() => 
+                                              <ComponentLoadedHeader />
+                                      }                                
+                                  >
+                                        <Media />
+                                        <Line style={{backgroundColor:'rgba(25,25,25,0.1)'}}/>
+                                  </Placeholder>
         );
     }
 
@@ -363,7 +397,7 @@ header:{
   inputIcon:{
     marginLeft:15,
     justifyContent: 'center'
-  },
+  }, 
 });
 
 

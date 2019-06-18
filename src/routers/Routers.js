@@ -17,7 +17,7 @@ class Routers extends Component<{}>{
 constructor(props){
     super(props)
  	   this.props.LIST_DASBOARD_CEK();
- 	   this.props.LIST_DASBOARD_MENU_CEK();
+ 	   this.props.LIST_DASBOARD_MENU_CEK(); 
 }
   componentWillMount(){
 	

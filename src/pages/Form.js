@@ -32,8 +32,17 @@ componentWillMount(){
   	 //  this.props.cekData();      
     //   console.log('Hi from React Native mantap 14 = '+this.props.LIST_PRODUCT_PREORITAS_CEK_VALUE);   
   }
-// 1e:4a:97:31:4f:ab:8e:42:78:7b:f5:76:a0:e3:94:fa:59:60:62:48
+
 //1001487462436-ilocam5dabdra017f750ktfjm705il1h.apps.googleusercontent.com
+//rRW++LUjmZZ+58EbN5DVhGAnkX4=
+//yiZQnl4GOQBr3tPZs6wQ3L0I29w=
+
+// keytool -exportcert -alias androiddebugkey -keystore "C:\Users\Irfan\.android\debug.keystore" | "C:\OpenSSL\bin\openssl" sha1 -binary | "C:\OpenSSL\bin\openssl" base64
+// Enter keystore password:  android
+// XCtP1q/ljQRX6enTnAxsnCK5x0k=
+
+//SkiotesPLUS-ca90f425122c489a875c949f7f5fd617-signed.apk
+//CA:26:50:9C:8E:06:39:00:6B:DE:D3:D9:B3:AC:10:DC:BD:25:DB:DC
 async loginWithFacebook() { 
     const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('2359863914339660',
            { permissions: ["public_profile", "email"] })
@@ -42,6 +51,8 @@ async loginWithFacebook() {
               console.log((await response.json()).id);
              // Alert.alert("Logged in!", `Hi ${(await response.json()).name}!`);
              Actions.Dasbord();
+    }else{
+      console.log("ssssssssssssssss");
     }
   }
  async loginWithGoogle(){
@@ -160,14 +171,7 @@ clearDataLogin(){
             /> 
             <Text style={styles.TextStyleOR}> OR Login Using</Text>
             <View style={{flexDirection: 'row'}}>
-                   <TouchableOpacity activeOpacity={0.5} onPress={this.loginWithFacebook.bind(this)}>
-                            <Image
-                             source={require('@images/facebook.png')}
-                             style={styles.ImageIconStyle}
-                            />
-                        </TouchableOpacity>
-
-                       <TouchableOpacity  activeOpacity={0.5} onPress={this.loginWithGoogle.bind(this)}>
+                        <TouchableOpacity  activeOpacity={0.5} onPress={this.loginWithGoogle.bind(this)}>
                             <Image
                               source={require('@images/google.png')}
                               style={styles.ImageIconStyle}

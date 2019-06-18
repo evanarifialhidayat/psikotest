@@ -1,8 +1,8 @@
 {
   "expo": {
-                  	"name"      : "SKIOTES",
+                  	"name"      : "SkiotesPLUS",
                   	"icon"      : "./asset/logo.png",
-                  	"slug"      : "SKIOTES",
+                  	"slug"      : "SkiotesPLUS",
                     "sdkVersion": "27.0.0",
                     "splash": {
                                 "image": "./asset/Splass.png",
@@ -13,7 +13,7 @@
                       "icon": "./asset/logo.png",
                     },
                     "android"   : {
-                      "package" : "com.project.skiotes",
+                      "package" : "com.mobile.sikotesplus",
                       "config"  : {
                                   "googleMaps" : {
                                     "apiKey" : "AIzaSyBpxloSBAX_j0eGfm-yR50UQoS0CqfwiRo"
