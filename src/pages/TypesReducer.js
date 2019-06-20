@@ -4,7 +4,9 @@ import {
 	FETCHING_PEOPLE_REQUEST_eror,
 	TT,
 	LIST_DASBOARD,
-	LIST_DASBOARD_MENU
+	LIST_DASBOARD_MENU,	
+	LIST_DASBOARD_SETTING,
+	LIST_DASBOARD_MENU_SETTING
 } from '@pages/Types';
 
 import { combineReducers } from "redux";
@@ -71,6 +73,36 @@ const reducerDasboard = (state = initialStateDasbord, action) => {
 }
 
 
+//List DASBOARD MENU
+const initialStateDasbordMenuSetting = { 
+	isDataall: false,
+	dataall :[],
+};
+const reducerDasboardMenuSetting = (state = initialStateDasbordMenuSetting, action) => {
+	switch(action.type){
+		case LIST_DASBOARD_MENU_SETTING: 
+			return {...state,isDataall: false, dataall: action.items};
+		default:
+			return state;
+	}
+}
+
+
+//List DASBOARD
+const initialStateDasbordSetting = { 
+	isDataall: false,
+	dataall :[],
+};
+const reducerDasboardSetting = (state = initialStateDasbordSetting, action) => {
+	switch(action.type){
+		case LIST_DASBOARD_SETTING: 
+			return {...state,isDataall: false, dataall: action.playlod};
+		default:
+			return state;
+	}
+}
+
+
 
 
 const globalReducerSatu = combineReducers({  
@@ -78,6 +110,8 @@ const globalReducerSatu = combineReducers({
 //  x: tesx,
   reducerDasboardType: reducerDasboard,
   reducerDasboardMenuType: reducerDasboardMenu,
+  reducerDasboardSettingType: reducerDasboardSetting,
+  reducerDasboardMenuSettingType: reducerDasboardMenuSetting,
 });
 
 export default globalReducerSatu;

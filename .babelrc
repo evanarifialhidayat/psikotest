@@ -18,6 +18,7 @@
         "@dasbord": "./src/dasbord",
         "@api": "./src/api",     	        	
         "@kantor": "./src/kantor", 	
+        "@setting": "./src/setting",   
   		 }
   	   }
   	 ]

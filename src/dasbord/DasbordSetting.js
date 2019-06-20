@@ -21,7 +21,7 @@ const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window'
 const sliderWidth = viewportWidth;
 const itemWidth = viewportWidth;
 
-class Dasbord extends Component { 
+class DasbordSetting extends Component { 
  constructor(props) {
     super(props);  
     this.state = {
@@ -40,8 +40,6 @@ class Dasbord extends Component {
   }
 
   componentWillUnmount () {
-   //  this.props.LIST_PRODUCT_PREORITAS_CEK(this.state.datatampung[1].id);  
-   // console.log('Hi dasbord from React Native mantap 14 = '+this.props.LIST_PRODUCT_PREORITAS_CEK_VALUE.dataall);  
     BackHandler.removeEventListener('hardwareBackPress', () => this.backAndroid()) 
   }
 
@@ -152,36 +150,12 @@ class Dasbord extends Component {
 
  
  async _eventLavel(item){
-      if(item === 'TK'){
+      if(item === 'User'){
          Actions.Login(); 
       }
-      if(item === 'SD'){
-        Actions.Login(); 
-      }
-      if(item === 'SMP'){
-        Actions.Login(); 
-      }
-      if(item === 'SMA'){
-        Actions.Login(); 
-      }
-      if(item === 'S1'){
-        Actions.Login(); 
-      }
-      if(item === 'CPNS'){
-        Actions.Login(); 
-      }
-      if(item === 'Perusahaan'){
-        Actions.Login(); 
-      }
-      if(item === 'All Module'){
-        Actions.Login(); 
-      }
-      if(item === 'Versi Premium'){
-        Actions.Login(); 
-      }
-      if(item === 'Setting'){
-        Actions.DasbordSetting(); 
-      }
+      if(item === 'Scan Barcode'){
+        Actions.Scan(); 
+      }      
   }
  
  
@@ -221,7 +195,7 @@ class Dasbord extends Component {
           <View style={styles.header}>                
                 <Carousel
                     ref={c => this._slider1Ref = c}
-                    data={this.props.LIST_DASBOARD_CEK_VALUE.dataall}
+                    data={this.props.LIST_DASBOARD_SETTING_CEK_VALUE.dataall}
                     renderItem={this._renderItemHeader.bind(this)}
                     sliderWidth={sliderWidth}
                     itemWidth={itemWidth}
@@ -247,7 +221,7 @@ class Dasbord extends Component {
               <Grid
                 style={styles.list}
                 renderItem={this._renderItem}               
-                data={this.props.LIST_DASBOARD_MENU_CEK_VALUE.dataall}
+                data={this.props.LIST_DASBOARD_MENU_SETTING_CEK_VALUE.dataall}
                 itemsPerRow={4}
               />
 
@@ -403,48 +377,11 @@ header:{
 
 const mapStateToProps = state => {
   return {
-    LIST_DASBOARD_CEK_VALUE: state.reducerDasboardType,
-    LIST_DASBOARD_MENU_CEK_VALUE: state.reducerDasboardMenuType,
+    LIST_DASBOARD_SETTING_CEK_VALUE: state.reducerDasboardSettingType,
+    LIST_DASBOARD_MENU_SETTING_CEK_VALUE: state.reducerDasboardMenuSettingType,
   };
 }
 
 
 
-export default  connect(mapStateToProps)(Dasbord);
-
-
-
-
-
-
-
-
-// <View style={{  flex: 1,
-//                                 flexDirection: 'row',
-//                                 position: 'absolute', 
-//                                 justifyContent: 'flex-end',
-//                                 top: 0, 
-//                                 left: 0, 
-//                                 right: 0, 
-//                                 bottom: 0, 
-//                                 paddingVertical: 25,                               
-//                               }}>
-//                       <IconBadge
-//                         MainElement={
-//                           <View style={{ backgroundColor: "#ffffff", borderRadius: 100,  }}>
-//                              <Image source={require('@images/lonceng.png')}  style={styles.actionButtonIconNotif}  />
-//                           </View>
-//                         }
-//                         BadgeElement={
-//                              <Text style={{color:'#FFFFFF'}}>3</Text>
-//                         }
-//                         IconBadgeStyle={
-//                           {
-//                             width:20,
-//                             height:20,
-//                             backgroundColor: '#ff0000'
-//                           }
-//                         }
-//                         Hidden={this.state.BadgeCount==0}
-//                         />
-//                 </View>
+export default  connect(mapStateToProps)(DasbordSetting);

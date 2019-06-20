@@ -43,6 +43,7 @@ componentWillMount(){
 
 //SkiotesPLUS-ca90f425122c489a875c949f7f5fd617-signed.apk
 //CA:26:50:9C:8E:06:39:00:6B:DE:D3:D9:B3:AC:10:DC:BD:25:DB:DC
+//keytool -exportcert -alias androiddebugkey -keystore "C:\Users\Irfan\.android\debug.keystore" | "C:\OpenSSL\bin\openssl" sha1 -binary |"C:\OpenSSL\bin\openssl" base64
 async loginWithFacebook() { 
     const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('2359863914339660',
            { permissions: ["public_profile", "email"] })

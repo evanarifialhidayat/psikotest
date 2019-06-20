@@ -8,6 +8,8 @@ export const TT = 'TT';
 
 //List Dasbord 
 export const LIST_DASBOARD = 'LIST_DASBOARD';
-
-//List Dasbord 
 export const LIST_DASBOARD_MENU = 'LIST_DASBOARD_MENU';
+
+//List Dasbord Setting
+export const LIST_DASBOARD_SETTING = 'LIST_DASBOARD_SETTING';
+export const LIST_DASBOARD_MENU_SETTING = 'LIST_DASBOARD_MENU_SETTING';
