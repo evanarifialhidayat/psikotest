@@ -22,11 +22,11 @@ export default  class FormScan extends Component<{}> {
 componentWillMount(){}
 componentDidMount(){ 
    Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT); 
-   BackHandler.addEventListener('hardwareBackPress', () =>  this.setState({  viewBardcode: true, })  );
+ //  BackHandler.addEventListener('hardwareBackPress', () =>  this.setState({  viewBardcode: true, })  );
   this._requestCameraPermission(); 
 }
 
-_backDAsbordSetting(){
+_backScan(){
   this.setState({  viewBardcode: false, }) ;
 }
   _requestCameraPermission = async () => {
@@ -83,9 +83,23 @@ _submit(){
             }
             {
               this.state.viewBardcode === true ? 
+             <View>
                     <BarCodeScanner  onBarCodeRead={this._handleBarCodeRead}  
-                      style={{ height: 200, width: 200 }}   
+                      style={{ height: 200, width: 300 }}   
                     />
+            
+                     <AnimateLoadingButton
+                                ref={c => (this.loadingButton = c)}
+                                width={300}
+                                height={50}
+                                title="Back"
+                                titleFontSize={16}
+                                titleColor="rgb(255,255,255)"
+                                backgroundColor="#00b5ec"
+                                borderRadius={4}
+                                onPress={this._backScan.bind(this)}
+                              /> 
+            </View>
               : false
             }            
       </View>
