@@ -153,25 +153,25 @@ class Dasbord extends Component {
  
  async _eventLavel(item){
       if(item === 'TK'){
-         Actions.Login(); 
+         Actions.DasbordTk(); 
       }
       if(item === 'SD'){
-        Actions.Login(); 
+        Actions.DasbordSD(); 
       }
       if(item === 'SMP'){
-        Actions.Login(); 
+        Actions.DasbordSMP(); 
       }
       if(item === 'SMA'){
-        Actions.Login(); 
+        Actions.DasbordSMA(); 
       }
       if(item === 'S1'){
-        Actions.Login(); 
+        Actions.DasbordS1(); 
       }
       if(item === 'CPNS'){
-        Actions.Login(); 
+        Actions.DasbordCPNS(); 
       }
       if(item === 'Perusahaan'){
-        Actions.Login(); 
+        Actions.DasbordPROF(); 
       }
       if(item === 'All Module'){
         Actions.Login(); 
@@ -252,9 +252,6 @@ class Dasbord extends Component {
               />
 
               <ActionButton buttonColor="rgba(231,76,60,1)">
-                <ActionButton.Item buttonColor='#3498db' title="Home" onPress={() => {this.backAndroid()}}>
-                   <Image source={require('@images/house.png')}  style={styles.actionButtonIcon}  />
-                </ActionButton.Item>
                 <ActionButton.Item buttonColor='#8e2600' title="Keluar" onPress={() => {this.backAndroid()}}>
                    <Image source={require('@images/signaling.png')}  style={styles.actionButtonIcon}  />
                 </ActionButton.Item>                          
@@ -339,8 +336,8 @@ header:{
     marginTop: 0,
    alignItems: 'center',
      justifyContent: 'center',
-     color : 'white',
-  },
+     color : '#84000f',
+  }, 
    slider: {
         marginTop: 0,
         overflow: 'visible' 

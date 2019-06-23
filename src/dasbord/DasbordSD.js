@@ -21,7 +21,7 @@ const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window'
 const sliderWidth = viewportWidth;
 const itemWidth = viewportWidth;
 
-class DasbordSetting extends Component { 
+class DasbordSD extends Component { 
  constructor(props) {
     super(props);  
     this.state = {
@@ -196,7 +196,7 @@ class DasbordSetting extends Component {
           <View style={styles.header}>                
                 <Carousel
                     ref={c => this._slider1Ref = c}
-                    data={this.props.LIST_DASBOARD_SETTING_CEK_VALUE.dataall}
+                    data={this.props.LIST_DASBOARD_SD_CEK_VALUE.dataall}
                     renderItem={this._renderItemHeader.bind(this)}
                     sliderWidth={sliderWidth}
                     itemWidth={itemWidth}
@@ -222,7 +222,7 @@ class DasbordSetting extends Component {
               <Grid
                 style={styles.list}
                 renderItem={this._renderItem}               
-                data={this.props.LIST_DASBOARD_MENU_SETTING_CEK_VALUE.dataall}
+                data={this.props.LIST_DASBOARD_MENU_SD_CEK_VALUE.dataall}
                 itemsPerRow={4}
               />
 
@@ -378,11 +378,11 @@ header:{
 
 const mapStateToProps = state => {
   return {
-    LIST_DASBOARD_SETTING_CEK_VALUE: state.reducerDasboardSettingType,
-    LIST_DASBOARD_MENU_SETTING_CEK_VALUE: state.reducerDasboardMenuSettingType,
+    LIST_DASBOARD_SD_CEK_VALUE: state.reducerDasboardSDType,
+    LIST_DASBOARD_MENU_SD_CEK_VALUE: state.reducerDasboardMenuSDType,
   };
 }
 
 
 
-export default  connect(mapStateToProps)(DasbordSetting);
+export default  connect(mapStateToProps)(DasbordSD);
